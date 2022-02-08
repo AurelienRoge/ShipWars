@@ -1,0 +1,19 @@
+Comment faire le jeu:
+
+S'inspirer du TP4:
+Une classe pour les mecaniques du jeu
+une classe pour la partie visuelle
+
+Partie mécanique :
+
+Tableau de 100 cases (10x10) de caractères : V pour Vide, B pour bateau, T pour Touché, R pour raté
+Créer tous les slots du jeu : 
+Tirer -> touché ou raté et interdire de tirer là ou on a déjà tiré
+gestion du tour
+gagnant
+
+(tirer, touché, raté, joueur suivant, gagnant etc etc)
+Lier le graphique au jeu
+
+
+Partie serveur (/ff)
