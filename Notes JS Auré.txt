@@ -11,9 +11,14 @@ Créer tous les slots du jeu :
 Tirer -> touché ou raté et interdire de tirer là ou on a déjà tiré
 gestion du tour
 gagnant
+placer ses bateaux
 
 (tirer, touché, raté, joueur suivant, gagnant etc etc)
 Lier le graphique au jeu
 
 
 Partie serveur (/ff)
+
+Notes du 09/02/22 :
+J'ai fait les bases du jeu : tableau pour chaque joueur, gestion du tour, tirer
+Il me manque encore à faire la partie visuelle, la gestion du vainqueur, le placement des bateaux.
