@@ -16,6 +16,7 @@ class shipWarsGame{
 
 
         this.playerTurn = 0;
+        this.winner = undefined;
 
         this.initializeRandomMap(this.GameMapPlayer0);
         this.initializeRandomMap(this.GameMapPlayer1);
@@ -38,9 +39,11 @@ class shipWarsGame{
             switch(GameMap[index]){
                 case "B":
                     GameMap[index] = "T";
+                    console.log("Touché !")
                     break;
                 case "V":
                     GameMap[index] = "R";
+                    console.log("Raté !")
                     this.changePlayerTurn();
             }
         }
@@ -57,19 +60,51 @@ class shipWarsGame{
             this.playerTurn = 0;
         }
     }
-}
 
+    isMapFinished(GameMap){
+        //On vérifie s'il reste des cases bateau dans le tableau
+        for(let i = 0; i < GameMap.length; i++){
+            if(this.GameMap[i] == B){
+                return false; //Si oui, alors la partie n'est pas terminé pour ce joueur
+            }
+        }
+        return true;
+    }
 
-
-
-
-/*shipWarsGame.prototype.tileOnClickEvent = function(){
-    console.log(self);
-}
-
-EventListeners(){
-        for(let i = 0; i < this.TilesTab.length; i++){
-            this.TilesTab[i].addEventListener('click', this.tileOnClickEvent.bind(this.TilesTab[i]));
+    isGameFinished(){
+        if(this.isMapFinished(this.GameMapPlayer0) || this.isMapFinished(this.GameMapPlayer1)){
+            return true
+        }
+        else{
+            return false;
         }
     }
- Pour la partie view */
+
+
+    getWinner(){
+        if(this.isMapFinished(this.GameMapPlayer0)){
+            this.winner = 1; //Le gagnant est le joueur 1
+            return this.winner;
+        }
+
+        if(this.isMapFinished(this.GameMapPlayer1)){
+            this.winner = 0; //Le gagnant est le joueur 0
+            return this.winner;
+        }
+
+        this.winner = undefined //Sinon, il n'y a pas de gagnant
+    }
+
+    getGameMapPlayer0(){
+        return this.GameMapPlayer0;
+    }
+
+    getGameMapPlayer1(){
+        return this.GameMapPlayer1;
+    }
+}
+
+
+
+
+
