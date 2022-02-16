@@ -29,3 +29,8 @@ J'ai fait la gestion de vainqueur, j'ai avancé sur la partie graphique (environ
 Notes du 15/02/22:
 Partie graphique 75%.
 Je vais peut etre regarder pour générer les tableaux dynamiquement plutot que dans mon html
+
+Notes du 15/02/22:
+Partie graphique de base 100% (de base car y'a pas encore les différentes armes et les boutons qui vont avec etc)
+
+à faire maintenant : les différentes armes.

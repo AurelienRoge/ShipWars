@@ -45,6 +45,7 @@ class shipWarsGame{
                     GameMap[index] = "R";
                     console.log("Raté !")
                     this.changePlayerTurn();
+                    break;
             }
         }
         else{
@@ -64,7 +65,7 @@ class shipWarsGame{
     isMapFinished(GameMap){
         //On vérifie s'il reste des cases bateau dans le tableau
         for(let i = 0; i < GameMap.length; i++){
-            if(this.GameMap[i] == B){
+            if(GameMap[i] == "B"){
                 return false; //Si oui, alors la partie n'est pas terminé pour ce joueur
             }
         }
@@ -101,6 +102,10 @@ class shipWarsGame{
 
     getGameMapPlayer1(){
         return this.GameMapPlayer1;
+    }
+
+    getPlayerTurn(){
+        return this.playerTurn;
     }
 }
 
