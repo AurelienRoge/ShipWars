@@ -4,16 +4,7 @@ class shipWarsGame{
         //Initialisation du tableau représentant la carte du jeu.
         //Tableau de 100 cases (10x10) de caractères : V pour Vide, B pour bateau, T pour Touché, R pour raté
         this.GameMapPlayer0 =  new Array(100)
-        for(let i = 0; i < 100; i++){
-            this.GameMapPlayer0[i] = "V";
-        }
-
         this.GameMapPlayer1 =  new Array(100)
-        for(let i = 0; i < 100; i++){
-            this.GameMapPlayer1[i] = "V";
-        }
-        
-
 
         this.playerTurn = 0;
         this.winner = undefined;
@@ -27,12 +18,43 @@ class shipWarsGame{
 
 
     initializeRandomMap(GameMap){
-        for(let i = 0; i < GameMap.length; i++){
-            if(Math.floor(Math.random() * 100) % 5 == 0){
-                GameMap[i] = "B"
+        for(let i = 0; i < 100; i++){
+            GameMap[i] = "V";
+        }
+
+        GameMap.shipList = new Array(5);
+        GameMap.shipList[0] = new ship(5);
+        GameMap.shipList[1] = new ship(4);
+        GameMap.shipList[2] = new ship(3);
+        GameMap.shipList[3] = new ship(3);
+        GameMap.shipList[4]= new ship(2);
+
+        for(let i = 0; i < GameMap.shipList.length; i++){
+            if(Math.random() > 0.5){GameMap.shipList[i].setOrientation("D");}
+            else{GameMap.shipList[i].setOrientation("R");}
+            while(GameMap.shipList[i].getHeadIndex() == undefined){
+                let tmp = Math.floor(Math.random() * 100);
+                if(GameMap.shipList[i].isShipFree(GameMap, tmp)){
+                    GameMap.shipList[i].setHeadIndex(tmp);
+                    switch(GameMap.shipList[i].getOrientation()){
+                        case "D":
+                            for(let j = tmp; j < tmp + (GameMap.shipList[i].getSize() * 10); j+= 10){
+                                GameMap[j] = "B";
+                            }
+                            break;
+                        
+                        case "R":
+                            for(let j = tmp; j < tmp + GameMap.shipList[i].getSize(); j++){
+                                GameMap[j] = "B";
+                            }
+                            break;
+                    }
+                }
             }
         }
     }
+
+    
 
     playerAttack(index, GameMap){
         if(GameMap[index] != "R" && GameMap[index] != "T"){
@@ -79,6 +101,12 @@ class shipWarsGame{
         else{
             return false;
         }
+    }
+
+    resetGame(){
+        this.initializeRandomMap(this.GameMapPlayer0);
+        this.initializeRandomMap(this.GameMapPlayer1);
+        this.playerTurn = 0;
     }
 
 

@@ -1,5 +1,5 @@
 class shipWarsView {
-    constructor(linkedGame) {
+    constructor() {
         this.game = new shipWarsGame();
 
         this.TilesTabPlayer0 = new Array();
@@ -43,15 +43,20 @@ class shipWarsView {
             gameMapClickedOn.parent.linkTabToGraph();
             console.log("Action effectuée");
         }
+        if (gameMapClickedOn.game.isGameFinished()) {
+
+        }
     }
 
     tileOnClickEventPlayer1(gameMapClickedOn, index, TileClikedOn) {
-        gameMapClickedOn.game.playerAttack(index, gameMapClickedOn.game.getGameMapPlayer1());
-        if (gameMapClickedOn.game.isGameFinished() == true) {
-            console.log("Partie terminée");
+        if (gameMapClickedOn.game.getPlayerTurn() == 1) {
+            gameMapClickedOn.game.playerAttack(index, gameMapClickedOn.game.getGameMapPlayer1());
+            if (gameMapClickedOn.game.isGameFinished() == true) {
+                console.log("Partie terminée");
+            }
+            gameMapClickedOn.parent.linkTabToGraph();
+            console.log("Action effectuée");
         }
-        gameMapClickedOn.parent.linkTabToGraph();
-        console.log("Action effectuée");
     }
 
     linkTabToGraph() {
@@ -62,6 +67,9 @@ class shipWarsView {
                     break;
                 case "T":
                     this.TilesTabPlayer0[i].innerHTML = "T";
+                    break;
+                case "B":
+                    this.TilesTabPlayer0[i].innerHTML = "B";
                     break;
             }
             switch (this.game.getGameMapPlayer1()[i]) {
