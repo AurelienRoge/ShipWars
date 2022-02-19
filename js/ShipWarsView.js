@@ -68,9 +68,6 @@ class shipWarsView {
                 case "T":
                     this.TilesTabPlayer0[i].innerHTML = "T";
                     break;
-                case "B":
-                    this.TilesTabPlayer0[i].innerHTML = "B";
-                    break;
             }
             switch (this.game.getGameMapPlayer1()[i]) {
                 case "R":

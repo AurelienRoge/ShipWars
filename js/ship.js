@@ -25,35 +25,52 @@ class ship {
         return this.orientation;
     }
 
-    areTilesAroundFree(GameMap, index) {
-        for (let i = -1; i < 1; i++) {
-            if (GameMap[index + i] != "V" || GameMap[index + 10 /*10 car taille d'une carte de bataille navale*/ + i] != "V" || GameMap[index - 10 + i] != "V") {
-                console.log("Returned False")
-                return false;
-            }
-        }
-        return true;
-    }
-
 
     isShipFree(GameMap, Headindex) {
         let j = 0;
         switch (this.orientation) {
             case "D":
-                for (let i = 0; i < this.size; i++) {
-                    if (this.areTilesAroundFree(GameMap, Headindex + j) == false) {
-                        return false;
+                for (let i = 1; i <= this.size; i++) {
+                    switch(i){
+                        case 1:
+                            if(GameMap[Headindex - 1 - 10] != "V" || GameMap[Headindex - 10] != "V" || GameMap[Headindex + 1 - 10] != "V" || GameMap[Headindex - 1] != "V" || GameMap[Headindex + 1] != "V"){
+                                return false;
+                            }
+                            break;
+                        case this.size:
+                            if(GameMap[Headindex + j - 1 + 10] != "V" || GameMap[Headindex + j + 10] != "V" || GameMap[Headindex + j + 1 + 10] != "V" || GameMap[Headindex + j - 1] != "V" || GameMap[Headindex + j + 1] != "V"){
+                                return false;
+                            }
+                            break;
+                        default:
+                            if(GameMap[Headindex + j - 1] != "V" || GameMap[Headindex + j + 1] != "V"){
+                                return false;
+                            }
                     }
                     j += 10; //10 = taille d'une carte de bataille navale
                 }
                 return true;
 
             case "R":
-                for (let i = 0; i < this.size; i++) {
-                    if (this.areTilesAroundFree(GameMap, Headindex + j) == false) {
-                        return false;
+                for (let i = 1; i <= this.size; i++) {
+                    switch(i){
+                        case 1:
+                            if(GameMap[Headindex - 1 - 10] != "V" ||  GameMap[Headindex - 1] != "V" || GameMap[Headindex - 1 + 10] != "V" ||  GameMap[Headindex - 10] != "V" || GameMap[Headindex + 10] != "V" || GameMap[Headindex + 1] != "V" || (Headindex + 1) % 10 == 0){
+                                return false;
+                            }
+                            break;
+                        case this.size:
+                            if(GameMap[Headindex + j - 10] != "V" || GameMap[Headindex + j + 10] != "V" || GameMap[Headindex + j + 1 + 10] != "V" || GameMap[Headindex + j + 1] != "V" || GameMap[Headindex + j + 1 - 10] != "V"){
+                                return false;
+                            }
+                            break;
+                        default:
+                            console.log("default");
+                            if(GameMap[Headindex + j - 10] != "V" || GameMap[Headindex + j + 10] != "V" || GameMap[Headindex + 1] != "V" || (Headindex + j + 1) % 10 == 0){
+                                return false;
+                            }
                     }
-                    j += 1; //1 -> on regarde la case suivante
+                    j += 1; //1 = case de droite
                 }
                 return true;
         }

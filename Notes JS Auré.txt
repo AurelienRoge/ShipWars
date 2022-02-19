@@ -41,3 +41,7 @@ Partie graphique de base 100% (de base car y'a pas encore les différentes armes
 18/02/22:
 Pour les règles, 1 bateau taille 5, 1 bateau taille 4, 2 bateaux taille 3, 1 bateau taille 2
 J'ai fait la génération de bateaux. La fonction est encore un peu bugguée mais ca se regle rapidement je pense
+
+19/02/22:
+Génération de plateau automatique
+Il faut faire le drag & drop pour les déplacer
