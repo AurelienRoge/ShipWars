@@ -4,6 +4,8 @@ class ship {
         this.size = size;//Taille
         this.headIndex = undefined;//Index de la tête du bateau (= quelle case dans le tableau)
         this.orientation = undefined; // D = Down R = right. Pour l'orientation, la bateau continue dans le sens de l'orientation depuis la tête.
+        this.tilesIndex = new Array();
+
     }
 
     //Pour récupérer la taille
@@ -29,6 +31,14 @@ class ship {
     //Pour récupérer l'orientation du bateau
     getOrientation() {
         return this.orientation;
+    }
+
+    addInTilesIndex(index){
+        this.tilesIndex.push(index);
+    }
+
+    getTilesIndex(){
+        return this.tilesIndex;
     }
 
 

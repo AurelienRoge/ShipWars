@@ -46,7 +46,7 @@ class shipWarsView {
         for(let i = 0; i <this.weaponButtons.length; i++){
             this.weaponButtons[i].parent = this;
         }
-        
+
         this.weaponButtons[0].addEventListener('click', function(){this.parent.changeWeapon("Missile")});
         this.weaponButtons[1].addEventListener('click', function(){this.parent.changeWeapon("Radar")});
         this.weaponButtons[2].addEventListener('click', function(){this.parent.changeWeapon("Torpille")});
