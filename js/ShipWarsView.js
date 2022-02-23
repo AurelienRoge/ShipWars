@@ -12,10 +12,15 @@ class shipWarsView {
             this.TilesTabPlayer1.push(document.getElementById("gametablePlayer1").getElementsByClassName("gametile")[i]);
         }
 
+        this.weaponButtons = new Array();
+        for(let i = 0; i < 4; i++){
+            this.weaponButtons.push(document.getElementsByClassName("weaponBtn")[i])
+        }
 
-        console.log(this.TilesTabPlayer0);
-        console.log(this.TilesTabPlayer1);
-        console.log(this.game.getGameMapPlayer0());
+        console.log(this.weaponButtons);
+        //this.missileBtn.addEventListener('click', this.changeWeapon.bind(this.game, "Missile"));
+
+
         //Initialisation des event listeners sur chaque case de chaque tableau
         this.EventListeners();
     }
@@ -35,6 +40,17 @@ class shipWarsView {
             this.TilesTabPlayer1[i].parent = this;
 
         }
+
+        
+        //Listeners des boutons des armes
+        for(let i = 0; i <this.weaponButtons.length; i++){
+            this.weaponButtons[i].parent = this;
+        }
+        
+        this.weaponButtons[0].addEventListener('click', function(){this.parent.changeWeapon("Missile")});
+        this.weaponButtons[1].addEventListener('click', function(){this.parent.changeWeapon("Radar")});
+        this.weaponButtons[2].addEventListener('click', function(){this.parent.changeWeapon("Torpille")});
+        this.weaponButtons[3].addEventListener('click', function(){this.parent.changeWeapon("Bombe")});
     }
 
     //Fonction pour les actions du joueur 0 lorsqu'il clic sur une case du tableau adverse
@@ -83,5 +99,10 @@ class shipWarsView {
                     break;
             }
         }
+    }
+
+    changeWeapon(weapon){
+        this.game.changeAttackMode(weapon);
+        console.log(this.game.getAttackMode());
     }
 }

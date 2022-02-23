@@ -45,3 +45,6 @@ J'ai fait la génération de bateaux. La fonction est encore un peu bugguée mai
 19/02/22:
 Génération de plateau automatique
 Il faut faire le drag & drop pour les déplacer
+
+23/02/22: 
+Il faut rajouter l'evenement "coulé" -> quand le bateau est complètement détruit, il faut le renseigner au joueur et indiquer que toutes les cases autour de ce bateau sont vides.
