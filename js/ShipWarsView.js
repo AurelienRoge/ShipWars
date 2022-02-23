@@ -40,7 +40,7 @@ class shipWarsView {
     //Fonction pour les actions du joueur 0 lorsqu'il clic sur une case du tableau adverse
     tileOnClickEventPlayer0(gameMapClickedOn, index, TileClikedOn) {
         if (gameMapClickedOn.game.getPlayerTurn() == 0) {//Si c'est à son tour
-            gameMapClickedOn.game.playerAttack(index, gameMapClickedOn.game.getGameMapPlayer1());//Effectuer l'attaque sur la case cliquée
+            gameMapClickedOn.game.playerAttack(index, gameMapClickedOn.game.getGameMapPlayer0());//Effectuer l'attaque sur la case cliquée
             if (gameMapClickedOn.game.isGameFinished() == true) {//Si la partie est terminée
                 console.log("Partie terminée");
             }
@@ -54,7 +54,7 @@ class shipWarsView {
 
     tileOnClickEventPlayer1(gameMapClickedOn, index, TileClikedOn) {
         if (gameMapClickedOn.game.getPlayerTurn() == 1) {//Si c'est à son tour
-            gameMapClickedOn.game.playerAttack(index, gameMapClickedOn.game.getGameMapPlayer0());//Effectuer l'attaque sur la case cliquée
+            gameMapClickedOn.game.playerAttack(index, gameMapClickedOn.game.getGameMapPlayer1());//Effectuer l'attaque sur la case cliquée
             if (gameMapClickedOn.game.isGameFinished() == true) {//Si la partie est terminée
                 console.log("Partie terminée");
             }
