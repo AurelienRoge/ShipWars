@@ -89,7 +89,16 @@ class shipWarsGame {
                             GameMap[index] = "T";
                             console.log("Touché !")
                             break;
+                        case "BR"://Si c'est un bateau, on indique qu'on a touché dans le tableau -> T
+                            GameMap[index] = "T";
+                            console.log("Touché !")
+                            break;
                         case "V"://Si c'est une case vide, on indique qu'on a raté -> R et le tour passe au joueur adverse
+                            GameMap[index] = "R";
+                            console.log("Raté !")
+                            this.changePlayerTurn();
+                            break;
+                        case "VR"://Si c'est une case vide, on indique qu'on a raté -> R et le tour passe au joueur adverse
                             GameMap[index] = "R";
                             console.log("Raté !")
                             this.changePlayerTurn();
@@ -101,14 +110,49 @@ class shipWarsGame {
                 }
                 break;
             case "Radar":
-                console.log("Mode radar");
-                break;
+                for (let i = -1; i < 2; i++) {
+                    for (let j = -1; j < 2; j++) {
+                        switch (GameMap[index + (i * 10) + j]) {
+                            case "B":
+                                GameMap[index + (i * 10) + j] = "BR"
+                                break;
+                            case "V":
+                                GameMap[index + (i * 10) + j] = "VR"
+                                break;
+                        }
+                        console.log("Mode radar");
+                        this.changePlayerTurn();
+                    }
+                }
+
 
             case "Torpille":
                 console.log("Mode Torpille");
                 break;
 
             case "Bombe":
+                for (let i = -10; i <= 10; i+= 10) {
+                    switch (GameMap[index + i]) {
+                        case "B"://Si c'est un bateau, on indique qu'on a touché dans le tableau -> T
+                            GameMap[index + i] = "T";
+                            console.log("Touché !")
+                            break;
+                        case "BR"://Si c'est un bateau, on indique qu'on a touché dans le tableau -> T
+                            GameMap[index + i] = "T";
+                            console.log("Touché !")
+                            break;
+                        case "V"://Si c'est une case vide, on indique qu'on a raté -> R et le tour passe au joueur adverse
+                            GameMap[index + i] = "R";
+                            console.log("Raté !")
+                            this.changePlayerTurn();
+                            break;
+                        case "VR"://Si c'est une case vide, on indique qu'on a raté -> R et le tour passe au joueur adverse
+                            GameMap[index + i] = "R";
+                            console.log("Raté !")
+                            this.changePlayerTurn();
+                            break;
+                    }
+                }
                 console.log("Mode bombe");
                 break;
         }

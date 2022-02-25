@@ -13,7 +13,7 @@ class shipWarsView {
         }
 
         this.weaponButtons = new Array();
-        for(let i = 0; i < 4; i++){
+        for (let i = 0; i < 4; i++) {
             this.weaponButtons.push(document.getElementsByClassName("weaponBtn")[i])
         }
 
@@ -41,16 +41,16 @@ class shipWarsView {
 
         }
 
-        
+
         //Listeners des boutons des armes
-        for(let i = 0; i <this.weaponButtons.length; i++){
+        for (let i = 0; i < this.weaponButtons.length; i++) {
             this.weaponButtons[i].parent = this;
         }
 
-        this.weaponButtons[0].addEventListener('click', function(){this.parent.changeWeapon("Missile")});
-        this.weaponButtons[1].addEventListener('click', function(){this.parent.changeWeapon("Radar")});
-        this.weaponButtons[2].addEventListener('click', function(){this.parent.changeWeapon("Torpille")});
-        this.weaponButtons[3].addEventListener('click', function(){this.parent.changeWeapon("Bombe")});
+        this.weaponButtons[0].addEventListener('click', function () { this.parent.changeWeapon("Missile") });
+        this.weaponButtons[1].addEventListener('click', function () { this.parent.changeWeapon("Radar") });
+        this.weaponButtons[2].addEventListener('click', function () { this.parent.changeWeapon("Torpille") });
+        this.weaponButtons[3].addEventListener('click', function () { this.parent.changeWeapon("Bombe") });
     }
 
     //Fonction pour les actions du joueur 0 lorsqu'il clic sur une case du tableau adverse
@@ -89,6 +89,12 @@ class shipWarsView {
                 case "T":
                     this.TilesTabPlayer0[i].innerHTML = "T";
                     break;
+                case "BR":
+                    this.TilesTabPlayer0[i].innerHTML = "BR"
+                    break;
+                case "VR":
+                    this.TilesTabPlayer0[i].innerHTML = "VR"
+                    break;
             }
             switch (this.game.getGameMapPlayer1()[i]) {
                 case "R":
@@ -97,11 +103,17 @@ class shipWarsView {
                 case "T":
                     this.TilesTabPlayer1[i].innerHTML = "T";
                     break;
+                case "BR":
+                    this.TilesTabPlayer1[i].innerHTML = "BR"
+                    break;
+                case "VR":
+                    this.TilesTabPlayer1[i].innerHTML = "VR"
+                    break;
             }
         }
     }
 
-    changeWeapon(weapon){
+    changeWeapon(weapon) {
         this.game.changeAttackMode(weapon);
         console.log(this.game.getAttackMode());
     }
