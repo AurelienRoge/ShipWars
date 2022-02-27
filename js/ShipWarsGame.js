@@ -10,7 +10,7 @@ class shipWarsGame {
         this.winner = undefined;
 
 
-        this.attackMode = "Missile"
+        this.attackMode = "Missile";
 
 
         //Booléen permettant de savoir si le joueur a déjà utilisé chaque capacité spéciale -> False = non utilisé (donc disponible)
@@ -63,17 +63,20 @@ class shipWarsGame {
                         case "D":
                             for (let j = tmp; j < tmp + (GameMap.shipList[i].getSize() * 10); j += 10) {
                                 GameMap[j] = "B";
+                                GameMap.shipList[i].addInTilesIndex(j);
                             }
                             break;
 
                         case "R":
                             for (let j = tmp; j < tmp + GameMap.shipList[i].getSize(); j++) {
                                 GameMap[j] = "B";
+                                GameMap.shipList[i].addInTilesIndex(j);
                             }
                             break;
                     }
                 }
             }
+            //console.log(GameMap.shipList[i].getTilesIndex());
         }
     }
 
@@ -88,10 +91,18 @@ class shipWarsGame {
                         case "B"://Si c'est un bateau, on indique qu'on a touché dans le tableau -> T
                             GameMap[index] = "T";
                             console.log("Touché !")
+                            this.findWhichShipIsAttacked(GameMap, index).tileHasBeenDestroyed(index);
+                            if (this.findWhichShipIsAttacked(GameMap, index).isShipDestroyed() == true) {
+                                console.log("Coulé !")
+                            }
                             break;
                         case "BR"://Si c'est un bateau, on indique qu'on a touché dans le tableau -> T
                             GameMap[index] = "T";
                             console.log("Touché !")
+                            this.findWhichShipIsAttacked(GameMap, index).tileHasBeenDestroyed(index);
+                            if (this.findWhichShipIsAttacked(GameMap, index).isShipDestroyed() == true) {
+                                console.log("Coulé !")
+                            }
                             break;
                         case "V"://Si c'est une case vide, on indique qu'on a raté -> R et le tour passe au joueur adverse
                             GameMap[index] = "R";
@@ -109,51 +120,154 @@ class shipWarsGame {
                     console.log("Tir impossible sur cette case !");
                 }
                 break;
+
+
             case "Radar":
-                for (let i = -1; i < 2; i++) {
-                    for (let j = -1; j < 2; j++) {
-                        switch (GameMap[index + (i * 10) + j]) {
-                            case "B":
-                                GameMap[index + (i * 10) + j] = "BR"
-                                break;
-                            case "V":
-                                GameMap[index + (i * 10) + j] = "VR"
-                                break;
+                if (this.isWeaponAvailable(this.getPlayerTurn(), "Radar")) {
+                    for (let i = -1; i < 2; i++) {
+                        for (let j = -1; j < 2; j++) {
+                            switch (GameMap[index + (i * 10) + j]) {
+                                case "B":
+                                    GameMap[index + (i * 10) + j] = "BR"
+                                    break;
+                                case "V":
+                                    GameMap[index + (i * 10) + j] = "VR"
+                                    break;
+                            }
                         }
-                        console.log("Mode radar");
-                        this.changePlayerTurn();
                     }
+                    this.weaponUsed(this.getPlayerTurn(), "Radar");
+                    this.changePlayerTurn();
                 }
+                else { console.log("Plus de charge pour cette arme !") }
+                break;
 
 
             case "Torpille":
-                console.log("Mode Torpille");
+                if (this.isWeaponAvailable(this.getPlayerTurn(), "Torpille")) {
+                    if (GameMap[index] == "B" || GameMap[index] == "BR" || GameMap[index] == "T") {
+                        if (this.findWhichShipIsAttacked(GameMap, index).getTilesIndex().length - this.findWhichShipIsAttacked(GameMap, index).getTilesDestroyedIndex().length <= 2) {
+                            this.findWhichShipIsAttacked(GameMap, index).destroyShip();
+                            for (let i = 0; i < this.findWhichShipIsAttacked(GameMap, index).getTilesIndex().length; i++) {
+                                GameMap[this.findWhichShipIsAttacked(GameMap, index).getTilesIndex()[i]] = "T";
+                            }
+                            console.log("Coulé !")
+                        }
+
+                        else {
+                            switch (GameMap[index]) {
+                                case "B"://Si c'est un bateau, on indique qu'on a touché dans le tableau -> T
+                                    GameMap[index] = "T";
+                                    console.log("Touché !")
+
+                                    break;
+                                case "BR"://Si c'est un bateau, on indique qu'on a touché dans le tableau -> T
+                                    GameMap[index] = "T";
+                                    console.log("Touché !");
+
+                                    break;
+                                case "V"://Si c'est une case vide, on indique qu'on a raté -> R et le tour passe au joueur adverse
+                                    GameMap[index] = "R";
+                                    console.log("Raté !");
+
+                                    break;
+                                case "VR"://Si c'est une case vide, on indique qu'on a raté -> R et le tour passe au joueur adverse
+                                    GameMap[index] = "R";
+                                    console.log("Raté !");
+
+                                    break;
+                            }
+                        }
+                    }
+                    else {
+                        GameMap[index] = "R";
+                    }
+                    this.weaponUsed(this.getPlayerTurn(), "Torpille");
+                    this.changePlayerTurn();
+                }
+                else { console.log("Plus de charge pour cette arme !") }
                 break;
 
             case "Bombe":
-                for (let i = -10; i <= 10; i+= 10) {
-                    switch (GameMap[index + i]) {
-                        case "B"://Si c'est un bateau, on indique qu'on a touché dans le tableau -> T
-                            GameMap[index + i] = "T";
-                            console.log("Touché !")
-                            break;
-                        case "BR"://Si c'est un bateau, on indique qu'on a touché dans le tableau -> T
-                            GameMap[index + i] = "T";
-                            console.log("Touché !")
-                            break;
-                        case "V"://Si c'est une case vide, on indique qu'on a raté -> R et le tour passe au joueur adverse
-                            GameMap[index + i] = "R";
-                            console.log("Raté !")
-                            this.changePlayerTurn();
-                            break;
-                        case "VR"://Si c'est une case vide, on indique qu'on a raté -> R et le tour passe au joueur adverse
-                            GameMap[index + i] = "R";
-                            console.log("Raté !")
-                            this.changePlayerTurn();
-                            break;
+                if (this.isWeaponAvailable(this.getPlayerTurn(), "Bombe")) {
+                    for (let i = -10; i <= 10; i += 10) {
+                        switch (GameMap[index + i]) {
+                            case "B"://Si c'est un bateau, on indique qu'on a touché dans le tableau -> T
+                                GameMap[index + i] = "T";
+                                console.log("Touché !")
+                                break;
+                            case "BR"://Si c'est un bateau, on indique qu'on a touché dans le tableau -> T
+                                GameMap[index + i] = "T";
+                                console.log("Touché !")
+                                break;
+                            case "V"://Si c'est une case vide, on indique qu'on a raté -> R et le tour passe au joueur adverse
+                                GameMap[index + i] = "R";
+                                console.log("Raté !")
+                                break;
+                            case "VR"://Si c'est une case vide, on indique qu'on a raté -> R et le tour passe au joueur adverse
+                                GameMap[index + i] = "R";
+                                console.log("Raté !")
+                                break;
+                        }
                     }
+
+                        switch (GameMap[index - 1]) {
+                            case "B"://Si c'est un bateau, on indique qu'on a touché dans le tableau -> T
+                                if ((index - 1) % 10 != 9) {
+                                    GameMap[index - 1] = "T";
+                                    console.log("Touché !")
+                                }
+                                break;
+                            case "BR"://Si c'est un bateau, on indique qu'on a touché dans le tableau -> T
+                                if ((index - 1) % 10 != 9) {
+                                    GameMap[index - 1] = "T";
+                                    console.log("Touché !");
+                                }
+                                break;
+                            case "V"://Si c'est une case vide, on indique qu'on a raté -> R et le tour passe au joueur adverse
+                                if ((index - 1) % 10 != 9) {
+                                    GameMap[index - 1] = "R";
+                                    console.log("Raté !");
+                                }
+                                break;
+                            case "VR"://Si c'est une case vide, on indique qu'on a raté -> R et le tour passe au joueur adverse
+                                if ((index - 1) % 10 != 9) {
+                                    GameMap[index - 1] = "R";
+                                    console.log("Raté !");
+                                }
+                                break;
+                        }
+                        switch (GameMap[index + 1]) {
+                            case "B"://Si c'est un bateau, on indique qu'on a touché dans le tableau -> T
+                                if ((index + 1) % 10 != 0) {
+                                    GameMap[index + 1] = "T";
+                                    console.log("Touché !")
+                                }
+                                break;
+                            case "BR"://Si c'est un bateau, on indique qu'on a touché dans le tableau -> T
+                                if ((index + 1) % 10 != 0) {
+                                    GameMap[index + 1] = "T";
+                                    console.log("Touché !");
+                                }
+                                break;
+                            case "V"://Si c'est une case vide, on indique qu'on a raté -> R et le tour passe au joueur adverse
+                                if ((index + 1) % 10 != 0) {
+                                    GameMap[index + 1] = "R";
+                                    console.log("Raté !");
+                                }
+                                break;
+                            case "VR"://Si c'est une case vide, on indique qu'on a raté -> R et le tour passe au joueur adverse
+                                if ((index + 1) % 10 != 0) {
+                                    GameMap[index + 1] = "R";
+                                    console.log("Raté !");
+                                }
+                                break;
+                        }
+                    
+                    this.weaponUsed(this.getPlayerTurn(), "Bombe");
+                    this.changePlayerTurn();
                 }
-                console.log("Mode bombe");
+                else { console.log("Plus de charge pour cette arme !") }
                 break;
         }
     }
@@ -167,6 +281,85 @@ class shipWarsGame {
             this.playerTurn = 0;
         }
     }
+
+    getPlayerTurn() {
+        return this.playerTurn;
+    }
+
+    weaponUsed(player, weapon) {
+        if (player == 0) {
+            switch (weapon) {
+                case "Radar":
+                    this.player0Radar = true;
+                    break;
+                case "Torpille":
+                    this.player0Torpille = true;
+                    break;
+
+                case "Bombe":
+                    this.player0Bombe = true;
+                    break;
+            }
+        }
+        if (player == 1) {
+            switch (weapon) {
+                case "Radar":
+                    this.player1Radar = true;
+                    break;
+                case "Torpille":
+                    this.player1Torpille = true;
+                    break;
+
+                case "Bombe":
+                    this.player1Bombe = true;
+                    break;
+            }
+        }
+    }
+
+    isWeaponAvailable(player, weapon) {
+        if (player == 0) {
+            switch (weapon) {
+                case "Radar":
+                    if (this.player0Radar == false) {
+                        return true;
+                    }
+                    break;
+                case "Torpille":
+                    if (this.player0Torpille == false) {
+                        return true;
+                    }
+                    break;
+
+                case "Bombe":
+                    if (this.player0Bombe == false) {
+                        return true;
+                    }
+                    break;
+            }
+        }
+        if (player == 1) {
+            switch (weapon) {
+                case "Radar":
+                    if (this.player1Radar == false) {
+                        return true
+                    }
+                    break;
+                case "Torpille":
+                    if (this.player1Torpille == false) {
+                        return true;
+                    }
+                    break;
+
+                case "Bombe":
+                    if (this.player1Bombe == false) {
+                        return true;
+                    }
+                    break;
+            }
+        }
+    }
+
 
     isMapFinished(GameMap) {
         //On vérifie s'il reste des cases bateau dans le tableau
@@ -234,6 +427,17 @@ class shipWarsGame {
     getAttackMode() {
         return this.attackMode;
     }
+
+    findWhichShipIsAttacked(GameMap, index) {
+        for (let i = 0; i < GameMap.shipList.length; i++) {
+            for (let j = 0; j < GameMap.shipList[i].getTilesIndex().length; j++) {
+                if (GameMap.shipList[i].getTilesIndex()[j] == index) {
+                    return GameMap.shipList[i];
+                }
+            }
+        }
+    }
+
 }
 
 

@@ -4,8 +4,8 @@ class ship {
         this.size = size;//Taille
         this.headIndex = undefined;//Index de la tête du bateau (= quelle case dans le tableau)
         this.orientation = undefined; // D = Down R = right. Pour l'orientation, la bateau continue dans le sens de l'orientation depuis la tête.
-        this.tilesIndex = new Array();
-
+        this.TilesIndex = new Array();
+        this.tilesDestroyedIndex = new Array();
     }
 
     //Pour récupérer la taille
@@ -34,11 +34,30 @@ class ship {
     }
 
     addInTilesIndex(index){
-        this.tilesIndex.push(index);
+        this.TilesIndex.push(index);
     }
 
     getTilesIndex(){
-        return this.tilesIndex;
+        return this.TilesIndex;
+    }
+
+    tileHasBeenDestroyed(index){
+        this.tilesDestroyedIndex.push(index);
+    }
+
+    getTilesDestroyedIndex(){
+        return this.tilesDestroyedIndex;
+    }
+
+    isShipDestroyed(){
+        if(this.TilesIndex.length == this.tilesDestroyedIndex.length){
+            return true;
+        }
+        return false;
+    }
+
+    destroyShip(){
+        this.tilesDestroyedIndex = this.TilesIndex;
     }
 
 
