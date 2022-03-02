@@ -29,8 +29,6 @@ class shipWarsGame {
         //Initialisation des cartes
         this.initializeRandomMap(this.GameMapPlayer0);
         this.initializeRandomMap(this.GameMapPlayer1);
-        //console.log(this.GameMapPlayer0);
-        //console.log(this.GameMapPlayer1);
 
     }
 
@@ -78,7 +76,6 @@ class shipWarsGame {
                     }
                 }
             }
-            //console.log(GameMap.shipList[i].getTilesIndex());
         }
     }
 

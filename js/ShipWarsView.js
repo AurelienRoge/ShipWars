@@ -18,7 +18,6 @@ class shipWarsView {
         }
 
         this.readyButton = document.getElementsByClassName("readyBtn")[0];
-        console.log(this.readyButton);
 
         //Initialisation des event listeners sur chaque case de chaque tableau
         this.EventListeners();
@@ -68,7 +67,7 @@ class shipWarsView {
                     console.log("Partie terminée");
                 }
                 gameMapClickedOn.parent.linkTabToGraph();//Mise à jour des textures
-                console.log("Action effectuée");
+
             }
             if (gameMapClickedOn.game.isGameFinished()) {
 
@@ -88,7 +87,6 @@ class shipWarsView {
                     console.log("Partie terminée");
                 }
                 gameMapClickedOn.parent.linkTabToGraph();//Mise à jour des textures
-                console.log("Action effectuée");
             }
         }
 
@@ -146,6 +144,5 @@ class shipWarsView {
 
     changeWeapon(weapon) {
         this.game.changeAttackMode(weapon);
-        console.log(this.game.getAttackMode());
     }
 }
