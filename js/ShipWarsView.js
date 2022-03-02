@@ -14,15 +14,15 @@ class shipWarsView {
 
         this.weaponButtons = new Array();
         for (let i = 0; i < 4; i++) {
-            this.weaponButtons.push(document.getElementsByClassName("weaponBtn")[i])
+            this.weaponButtons.push(document.getElementsByClassName("weaponBtn")[i]);
         }
 
-        console.log(this.weaponButtons);
-        //this.missileBtn.addEventListener('click', this.changeWeapon.bind(this.game, "Missile"));
-
+        this.readyButton = document.getElementsByClassName("readyBtn")[0];
+        console.log(this.readyButton);
 
         //Initialisation des event listeners sur chaque case de chaque tableau
         this.EventListeners();
+        this.linkTabToGraph();
     }
 
 
@@ -51,32 +51,47 @@ class shipWarsView {
         this.weaponButtons[1].addEventListener('click', function () { this.parent.changeWeapon("Radar") });
         this.weaponButtons[2].addEventListener('click', function () { this.parent.changeWeapon("Torpille") });
         this.weaponButtons[3].addEventListener('click', function () { this.parent.changeWeapon("Bombe") });
+
+        this.readyButton.parent = this;
+        this.readyButton.addEventListener('click', function () { this.parent.game.launchGame(); this.parent.linkTabToGraph() });
     }
 
     //Fonction pour les actions du joueur 0 lorsqu'il clic sur une case du tableau adverse
     tileOnClickEventPlayer0(gameMapClickedOn, index, TileClikedOn) {
-        if (gameMapClickedOn.game.getPlayerTurn() == 0) {//Si c'est à son tour
-            gameMapClickedOn.game.playerAttack(index, gameMapClickedOn.game.getGameMapPlayer0());//Effectuer l'attaque sur la case cliquée
-            if (gameMapClickedOn.game.isGameFinished() == true) {//Si la partie est terminée
-                console.log("Partie terminée");
-            }
-            gameMapClickedOn.parent.linkTabToGraph();//Mise à jour des textures
-            console.log("Action effectuée");
+        if (gameMapClickedOn.game.placementPhase) {
+            //Ici il y aura les evenement de placement de bateau
         }
-        if (gameMapClickedOn.game.isGameFinished()) {
+        else {
+            if (gameMapClickedOn.game.getPlayerTurn() == 0) {//Si c'est à son tour
+                gameMapClickedOn.game.playerAttack(index, gameMapClickedOn.game.getGameMapPlayer0());//Effectuer l'attaque sur la case cliquée
+                if (gameMapClickedOn.game.isGameFinished() == true) {//Si la partie est terminée
+                    console.log("Partie terminée");
+                }
+                gameMapClickedOn.parent.linkTabToGraph();//Mise à jour des textures
+                console.log("Action effectuée");
+            }
+            if (gameMapClickedOn.game.isGameFinished()) {
 
+            }
         }
     }
 
     tileOnClickEventPlayer1(gameMapClickedOn, index, TileClikedOn) {
-        if (gameMapClickedOn.game.getPlayerTurn() == 1) {//Si c'est à son tour
-            gameMapClickedOn.game.playerAttack(index, gameMapClickedOn.game.getGameMapPlayer1());//Effectuer l'attaque sur la case cliquée
-            if (gameMapClickedOn.game.isGameFinished() == true) {//Si la partie est terminée
-                console.log("Partie terminée");
-            }
-            gameMapClickedOn.parent.linkTabToGraph();//Mise à jour des textures
-            console.log("Action effectuée");
+        if (gameMapClickedOn.game.placementPhase) {
+            //Ici il y aura les evenement de placement de bateau
+
         }
+        else {
+            if (gameMapClickedOn.game.getPlayerTurn() == 1) {//Si c'est à son tour
+                gameMapClickedOn.game.playerAttack(index, gameMapClickedOn.game.getGameMapPlayer1());//Effectuer l'attaque sur la case cliquée
+                if (gameMapClickedOn.game.isGameFinished() == true) {//Si la partie est terminée
+                    console.log("Partie terminée");
+                }
+                gameMapClickedOn.parent.linkTabToGraph();//Mise à jour des textures
+                console.log("Action effectuée");
+            }
+        }
+
     }
 
     //Fonction pour mettre à jour les textures
@@ -95,6 +110,14 @@ class shipWarsView {
                 case "VR":
                     this.TilesTabPlayer0[i].innerHTML = "VR"
                     break;
+                case "B":
+                    if (this.game.placementPhase) {
+                        this.TilesTabPlayer0[i].innerHTML = "B"
+                    }
+                    else {
+                        this.TilesTabPlayer0[i].innerHTML = ""
+                    }
+                    break;
             }
             switch (this.game.getGameMapPlayer1()[i]) {
                 case "R":
@@ -108,6 +131,14 @@ class shipWarsView {
                     break;
                 case "VR":
                     this.TilesTabPlayer1[i].innerHTML = "VR"
+                    break;
+                case "B":
+                    if (this.game.placementPhase) {
+                        this.TilesTabPlayer1[i].innerHTML = "B"
+                    }
+                    else {
+                        this.TilesTabPlayer1[i].innerHTML = ""
+                    }
                     break;
             }
         }

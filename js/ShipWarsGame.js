@@ -23,6 +23,8 @@ class shipWarsGame {
         this.player1Bombe = false;
 
 
+        this.placementPhase = true;
+
 
         //Initialisation des cartes
         this.initializeRandomMap(this.GameMapPlayer0);
@@ -360,7 +362,9 @@ class shipWarsGame {
         }
     }
 
-
+    launchGame(){
+        this.placementPhase = false;
+    }
     isMapFinished(GameMap) {
         //On vérifie s'il reste des cases bateau dans le tableau
         for (let i = 0; i < GameMap.length; i++) {
