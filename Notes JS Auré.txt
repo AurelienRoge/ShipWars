@@ -54,3 +54,9 @@ Il faut rajouter l'evenement "coulé" -> quand le bateau est complètement détr
 Fonctions à coder :
 leaveGame(socket)
 joinWaitingPlayers() -> il reste à débugguer pour les rooms pour réussir à les créer
+27/03/22:
+à faire
+déconnexion
+fin de partie
+graphique = pas innerHTML mais classe
+reset le graphique entre les parties

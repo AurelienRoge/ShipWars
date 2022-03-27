@@ -29,9 +29,9 @@ $(function() {
     })
   
     //Mise a jour du tour de jeu
-    socket.on('update', function() {
-      //view.game.changePlayerTurn();
-      //view.linkTabToGraph();
+    socket.on('update', function(selfGrid, opponentGrid) {
+      view.updateGrids(selfGrid, opponentGrid);
+      view.linkTabToGraph();
     });
   
     //Fin de partie (AMODIFIER POUR FAIRE APPARAITRE DES ELEMENTS SUR L HTML)
@@ -59,4 +59,8 @@ $(function() {
   function sendShot(index) {
     socket.emit('shot', index);
   }
+
+  function changeWeapon(weapon) {
+    socket.emit('changeWeapon', weapon);
+}
   

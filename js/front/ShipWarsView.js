@@ -1,15 +1,25 @@
 class shipWarsView {
     constructor() {
-        //this.game = new shipWarsGame(id, idPlayer1, idPlayer2);//On créé une partie
+
+        this.gridThisPlayer = new Array(100);
+
+        this.gridFromOpponent = new Array(100);
+
+        for (let i = 0; i < 100; i++) {
+            this.gridThisPlayer[i] = "V";
+        }
+        for (let i = 0; i < 100; i++) {
+            this.gridFromOpponent[i] = "V";
+        }
 
         //On récupère les tableaux de l'html
-        this.TilesTabPlayer0 = new Array();
+        this.tabThisPlayer = new Array();
         for (let i = 0; i < 100; i++) {
-            this.TilesTabPlayer0.push(document.getElementById("gametablePlayer0").getElementsByClassName("gametile")[i]);
+            this.tabThisPlayer.push(document.getElementById("gametablePlayer0").getElementsByClassName("gametile")[i]);
         }
-        this.TilesTabPlayer1 = new Array();
+        this.tabOpponent = new Array();
         for (let i = 0; i < 100; i++) {
-            this.TilesTabPlayer1.push(document.getElementById("gametablePlayer1").getElementsByClassName("gametile")[i]);
+            this.tabOpponent.push(document.getElementById("gametablePlayer1").getElementsByClassName("gametile")[i]);
         }
 
         this.weaponButtons = new Array();
@@ -17,28 +27,17 @@ class shipWarsView {
             this.weaponButtons.push(document.getElementsByClassName("weaponBtn")[i])
         }
 
-        console.log(this.weaponButtons);
-        //this.missileBtn.addEventListener('click', this.changeWeapon.bind(this.game, "Missile"));
-
 
         //Initialisation des event listeners sur chaque case de chaque tableau
-        //this.EventListeners();
+        this.EventListeners();
+        this.linkTabToGraph();
     }
 
 
     //Pour ajouter les listeners de chaque case de chaque tableau
-    /*EventListeners() {
-        for (let i = 0; i < this.TilesTabPlayer0.length; i++) {
-            this.TilesTabPlayer0[i].addEventListener('click', this.tileOnClickEventPlayer0.bind(this.TilesTabPlayer0, this.TilesTabPlayer0[i], i));
-            //this.TilesTabPlayer0[i].game = this.game;
-            this.TilesTabPlayer0[i].parent = this;
-
-        }
-        for (let i = 0; i < this.TilesTabPlayer1.length; i++) {
-            this.TilesTabPlayer1[i].addEventListener('click', this.tileOnClickEventPlayer1.bind(this.TilesTabPlayer1, this.TilesTabPlayer1[i], i));
-            //this.TilesTabPlayer1[i].game = this.game;
-            this.TilesTabPlayer1[i].parent = this;
-
+    EventListeners() {
+        for (let i = 0; i < this.tabOpponent.length; i++) {
+            this.tabOpponent[i].addEventListener('click', function () { sendShot(i) });
         }
 
 
@@ -47,82 +46,82 @@ class shipWarsView {
             this.weaponButtons[i].parent = this;
         }
 
-        this.weaponButtons[0].addEventListener('click', function () { this.parent.changeWeapon("Missile") });
-        this.weaponButtons[1].addEventListener('click', function () { this.parent.changeWeapon("Radar") });
-        this.weaponButtons[2].addEventListener('click', function () { this.parent.changeWeapon("Torpille") });
-        this.weaponButtons[3].addEventListener('click', function () { this.parent.changeWeapon("Bombe") });
+        this.weaponButtons[0].addEventListener('click', function () { changeWeapon("Missile") });
+        this.weaponButtons[1].addEventListener('click', function () { changeWeapon("Radar") });
+        this.weaponButtons[2].addEventListener('click', function () { changeWeapon("Torpille") });
+        this.weaponButtons[3].addEventListener('click', function () { changeWeapon("Bombe") });
     }
-    */
+
     //Fonction pour les actions du joueur 0 lorsqu'il clic sur une case du tableau adverse
-    /*tileOnClickEventPlayer0(gameMapClickedOn, index, TileClikedOn) {
-        if (gameMapClickedOn.game.getPlayerTurn() == 0) {//Si c'est à son tour
-            gameMapClickedOn.game.playerAttack(index, gameMapClickedOn.game.getGameMapPlayer0());//Effectuer l'attaque sur la case cliquée
-            if (gameMapClickedOn.game.isGameFinished() == true) {//Si la partie est terminée
-                console.log("Partie terminée");
-            }
-            gameMapClickedOn.parent.linkTabToGraph();//Mise à jour des textures
-            console.log("Action effectuée");
-        }
-        if (gameMapClickedOn.game.isGameFinished()) {
 
-        }
-    }
-
-    tileOnClickEventPlayer1(gameMapClickedOn, index, TileClikedOn) {
-        if (gameMapClickedOn.game.getPlayerTurn() == 1) {//Si c'est à son tour
+    clickOnOpponentTabEvent(index) {
+        sendShot(index);
+        /*if (gameMapClickedOn.game.getPlayerTurn() == 1) {//Si c'est à son tour
             gameMapClickedOn.game.playerAttack(index, gameMapClickedOn.game.getGameMapPlayer1());//Effectuer l'attaque sur la case cliquée
             if (gameMapClickedOn.game.isGameFinished() == true) {//Si la partie est terminée
                 console.log("Partie terminée");
             }
             gameMapClickedOn.parent.linkTabToGraph();//Mise à jour des textures
             console.log("Action effectuée");
-        }
+        }*/
     }
-    */
 
-    /*
+    //Mise à jour des grilles suite à un envoi du serveur
+    updateGrids(selfGrid, opponentGrid) {
+        this.gridThisPlayer = selfGrid;
+        this.gridFromOpponent = opponentGrid;
+        console.log("selfGrid");
+        console.log(selfGrid);
+        console.log("Opponent Grid");
+        console.log(opponentGrid);
+    }
+
     //Fonction pour mettre à jour les textures
     linkTabToGraph() {
         for (let i = 0; i < 100; i++) {
-            switch (this.game.getGameMapPlayer0()[i]) {
+            switch (this.gridThisPlayer[i]) {
+                case "B":
+                    this.tabThisPlayer[i].innerHTML = "B";
+                    break;
                 case "R":
-                    this.TilesTabPlayer0[i].innerHTML = "R";
+                    this.tabThisPlayer[i].innerHTML = "R";
                     break;
                 case "T":
-                    this.TilesTabPlayer0[i].innerHTML = "T";
+                    this.tabThisPlayer[i].innerHTML = "T";
                     break;
                 case "BR":
-                    this.TilesTabPlayer0[i].innerHTML = "BR"
+                    this.tabThisPlayer[i].innerHTML = "BR"
                     break;
                 case "VR":
-                    this.TilesTabPlayer0[i].innerHTML = "VR"
-                    break;
-            }
-            switch (this.game.getGameMapPlayer1()[i]) {
-                case "R":
-                    this.TilesTabPlayer1[i].innerHTML = "R";
-                    break;
-                case "T":
-                    this.TilesTabPlayer1[i].innerHTML = "T";
-                    break;
-                case "BR":
-                    this.TilesTabPlayer1[i].innerHTML = "BR"
-                    break;
-                case "VR":
-                    this.TilesTabPlayer1[i].innerHTML = "VR"
+                    this.tabThisPlayer[i].innerHTML = "VR"
                     break;
             }
         }
+        for (let i = 0; i < 100; i++) {
+            switch (this.gridFromOpponent[i]) {
+                case "R":
+                    this.tabOpponent[i].innerHTML = "R";
+                    break;
+                case "T":
+                    this.tabOpponent[i].innerHTML = "T";
+                    break;
+                case "BR":
+                    this.tabOpponent[i].innerHTML = "BR"
+                    break;
+                case "VR":
+                    this.tabOpponent[i].innerHTML = "VR"
+                    break;
+            }
+        }
+
     }
 
-    changeWeapon(weapon) {
-        this.game.changeAttackMode(weapon);
-        console.log(this.game.getAttackMode());
-    }
-    */
 
 
-    setGameOver(){
+
+
+
+    setGameOver() {
         /*if(isWinner) {// AMODIFIER
             $('#turn-status').removeClass('alert-opponent-turn').removeClass('alert-your-turn')
                     .addClass('alert-winner').html('You won! <a href="#" class="btn-leave-game">Play again</a>.');
@@ -130,6 +129,6 @@ class shipWarsView {
             $('#turn-status').removeClass('alert-opponent-turn').removeClass('alert-your-turn')
                     .addClass('alert-loser').html('You lost. <a href="#" class="btn-leave-game">Play again</a>.');
           }*/
-          $('.btn-leave-game').click(sendLeaveRequest);
+        $('.btn-leave-game').click(sendLeaveRequest);
     }
 }
