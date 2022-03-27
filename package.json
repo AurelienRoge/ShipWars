@@ -1,0 +1,25 @@
+{
+  "name": "shipwars",
+  "version": "1.0.0",
+  "description": "Projet web CIR2",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AurelienRoge/ShipWars.git"
+  },
+  "author": "Aurélien Rogé Guillaume Leroy Théo Vangheluwe Théophile Demeulier",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AurelienRoge/ShipWars/issues"
+  },
+  "homepage": "https://github.com/AurelienRoge/ShipWars#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "html-entities": "^2.3.2",
+    "socket.io": "^4.4.1"
+  }
+}

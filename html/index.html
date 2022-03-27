@@ -1,319 +1,375 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/style.css">
-    <script src="../js/ship.js"></script>
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+
     <title>ShipWars</title>
 </head>
+
 <body>
-    <div id="divTwoTabs">
-        <table id="gametablePlayer0">
-            <tr class="tablerow">
-                <th class="rowheader"></th>
-                <td class="colheader">A</td>
-                <td class="colheader">B</td>
-                <td class="colheader">C</td>
-                <td class="colheader">D</td>
-                <td class="colheader">E</td>
-                <td class="colheader">F</td>
-                <td class="colheader">G</td>
-                <td class="colheader">H</td>
-                <td class="colheader">I</td>
-                <td class="colheader">J</td>
-            </tr>
-            <tr class="tablerow">
-                <th class="rowheader">1</th>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-            </tr>
-            <tr class="tablerow">
-                <th class="rowheader">2</th>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-            </tr>
-            <tr class="tablerow">
-                <th class="rowheader">3</th>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-            </tr>
-            <tr class="tablerow">
-                <th class="rowheader">4</th>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-            </tr>
-            <tr class="tablerow">
-                <th class="rowheader">5</th>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-            </tr>
-            <tr class="tablerow">
-                <th class="rowheader">6</th>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-            </tr>
-            <tr class="tablerow">
-                <th class="rowheader">7</th>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-            </tr>
-            <tr class="tablerow">
-                <th class="rowheader">8</th>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-            </tr>
-            <tr class="tablerow">
-                <th class="rowheader">9</th>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-            </tr>
-            <tr class="tablerow">
-                <th class="rowheader">10</th>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-            </tr>
-        </table>
+    <!-- Déconnecté du serveur -->
+    <div id="disconnected">
+        <div class="row">
+            <div class="col-sm-4 col-sm-offset-4 text-center">
+                <div class="alert alert-danger">
+                    <p>Not connected to server.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- File d'attente -->
+    <div id="waiting-room" style="display:none;">
+        <div class="row">
+            <div class="col-sm-4 col-sm-offset-4 text-center">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Waiting Room</div>
+                    <div class="panel-body">
+                        <p>You are connected to the server.</p>
+                        <p>Waiting for another player...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="game" style="display:none;">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Battleship Game #<span id="game-number"></span></div>
+                    <div class="panel-body">
+
+                        <!-- Grilles des joueurs -->
+                        <div id="divTwoTabs">
+                            <table id="gametablePlayer0">
+                                <h3>You</h3>
+                                <tr class="tablerow">
+                                    <th class="rowheader"></th>
+                                    <td class="colheader">A</td>
+                                    <td class="colheader">B</td>
+                                    <td class="colheader">C</td>
+                                    <td class="colheader">D</td>
+                                    <td class="colheader">E</td>
+                                    <td class="colheader">F</td>
+                                    <td class="colheader">G</td>
+                                    <td class="colheader">H</td>
+                                    <td class="colheader">I</td>
+                                    <td class="colheader">J</td>
+                                </tr>
+                                <tr class="tablerow">
+                                    <th class="rowheader">1</th>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                </tr>
+                                <tr class="tablerow">
+                                    <th class="rowheader">2</th>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                </tr>
+                                <tr class="tablerow">
+                                    <th class="rowheader">3</th>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                </tr>
+                                <tr class="tablerow">
+                                    <th class="rowheader">4</th>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                </tr>
+                                <tr class="tablerow">
+                                    <th class="rowheader">5</th>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                </tr>
+                                <tr class="tablerow">
+                                    <th class="rowheader">6</th>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                </tr>
+                                <tr class="tablerow">
+                                    <th class="rowheader">7</th>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                </tr>
+                                <tr class="tablerow">
+                                    <th class="rowheader">8</th>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                </tr>
+                                <tr class="tablerow">
+                                    <th class="rowheader">9</th>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                </tr>
+                                <tr class="tablerow">
+                                    <th class="rowheader">10</th>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                </tr>
+                            </table>
 
 
-        <table id="gametablePlayer1">
-            <tr class="tablerow">
-                <th class="rowheader"></th>
-                <td class="colheader">A</td>
-                <td class="colheader">B</td>
-                <td class="colheader">C</td>
-                <td class="colheader">D</td>
-                <td class="colheader">E</td>
-                <td class="colheader">F</td>
-                <td class="colheader">G</td>
-                <td class="colheader">H</td>
-                <td class="colheader">I</td>
-                <td class="colheader">J</td>
-            </tr>
-            <tr class="tablerow">
-                <th class="rowheader">1</th>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-            </tr>
-            <tr class="tablerow">
-                <th class="rowheader">2</th>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-            </tr>
-            <tr class="tablerow">
-                <th class="rowheader">3</th>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-            </tr>
-            <tr class="tablerow">
-                <th class="rowheader">4</th>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-            </tr>
-            <tr class="tablerow">
-                <th class="rowheader">5</th>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-            </tr>
-            <tr class="tablerow">
-                <th class="rowheader">6</th>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-            </tr>
-            <tr class="tablerow">
-                <th class="rowheader">7</th>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-            </tr>
-            <tr class="tablerow">
-                <th class="rowheader">8</th>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-            </tr>
-            <tr class="tablerow">
-                <th class="rowheader">9</th>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-            </tr>
-            <tr class="tablerow">
-                <th class="rowheader">10</th>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-                <td class="gametile"></td>
-            </tr>
-        </table>
+                            <table id="gametablePlayer1">
+                                <h3>Opponent</h3>
+                                <tr class="tablerow">
+                                    <th class="rowheader"></th>
+                                    <td class="colheader">A</td>
+                                    <td class="colheader">B</td>
+                                    <td class="colheader">C</td>
+                                    <td class="colheader">D</td>
+                                    <td class="colheader">E</td>
+                                    <td class="colheader">F</td>
+                                    <td class="colheader">G</td>
+                                    <td class="colheader">H</td>
+                                    <td class="colheader">I</td>
+                                    <td class="colheader">J</td>
+                                </tr>
+                                <tr class="tablerow">
+                                    <th class="rowheader">1</th>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                </tr>
+                                <tr class="tablerow">
+                                    <th class="rowheader">2</th>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                </tr>
+                                <tr class="tablerow">
+                                    <th class="rowheader">3</th>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                </tr>
+                                <tr class="tablerow">
+                                    <th class="rowheader">4</th>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                </tr>
+                                <tr class="tablerow">
+                                    <th class="rowheader">5</th>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                </tr>
+                                <tr class="tablerow">
+                                    <th class="rowheader">6</th>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                </tr>
+                                <tr class="tablerow">
+                                    <th class="rowheader">7</th>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                </tr>
+                                <tr class="tablerow">
+                                    <th class="rowheader">8</th>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                </tr>
+                                <tr class="tablerow">
+                                    <th class="rowheader">9</th>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                </tr>
+                                <tr class="tablerow">
+                                    <th class="rowheader">10</th>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                    <td class="gametile"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <ul class="list-group">
+                    <!-- Status -->
+                    <li class="list-group-item text-center" id="turn-status"></li>
+                    <!-- Sélection d'arme -->
+                    <div id="weaponSelectionBtn">
+                        <button class="weaponBtn">Missile</button>
+                        <button class="weaponBtn">Radar</button>
+                        <button class="weaponBtn">Torpille</button>
+                        <button class="weaponBtn">Bombe</button>
+                    </div>
+                </ul>
+
+            </div>
+        </div>
     </div>
-    <div id="weaponSelectionBtn">
-        <button class="weaponBtn">Missile</button>
-        <button class="weaponBtn">Radar</button>
-        <button class="weaponBtn">Torpille</button>
-        <button class="weaponBtn">Bombe</button>
     </div>
+
     
 
-    <script src="../js/ShipWarsGame.js"></script>
-    <script src="../js/ShipWarsView.js"></script>
-    <script src="../js/main.js"></script>
+    <script src="../js/front/ShipWarsView.js"></script>
+    <script src="../js/front/client.js"></script>
 </body>
+
 </html>

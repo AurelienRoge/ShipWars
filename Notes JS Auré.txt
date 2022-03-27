@@ -48,3 +48,9 @@ Il faut faire le drag & drop pour les déplacer
 
 23/02/22: 
 Il faut rajouter l'evenement "coulé" -> quand le bateau est complètement détruit, il faut le renseigner au joueur et indiquer que toutes les cases autour de ce bateau sont vides.
+
+
+26/03/22:
+Fonctions à coder :
+leaveGame(socket)
+joinWaitingPlayers() -> il reste à débugguer pour les rooms pour réussir à les créer
