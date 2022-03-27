@@ -1,8 +1,10 @@
-index.html devrait être la page d'acceuil
-login.html la page joli de guigui
-
-j'ai encore des trucs a clean techniquement dans les .js mais ca marche +/- avec la combinaison Marco/swagg
-
 cookies / ok 24H
-login / ok sans SQL
-register / a faire
+login / ok avec sql
+register / ok avec sql
+
+paramètres bdd sur discord en pin
+
+à faire :
+
+popups
+re road register -> login (pk pas)
