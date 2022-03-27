@@ -1,16 +1,104 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <title>CIR 2 Test Chat</title>
-    </head>
-    <body>
-        <h1>Veuillez saisir un nom d'utilisateur : </h1>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Descript A COMPLETER">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <title>Ship Wars</title>
+
+  <!-- FAVICON -->
+  <link rel="icon" href="img/favicon.ico" type="image/ico">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="../css/inscription.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/header.css">
+  <link rel="stylesheet" href="../css/footer.css">
+  <link rel="stylesheet" href="../css/home.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/hover.css">
+  <link rel="stylesheet" href="../css/leaderboard.css">
+
+
+  <!-- JS -->
+  <script src="https://kit.fontawesome.com/a076d05399.js"> </script>
+  <script src="../js/inscription.js" defer></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <!-- PT serif -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- FONTAWESOME LIB -->
+  <script src="https://kit.fontawesome.com/45e38e596f.js" crossorigin="anonymous"></script>
+
+  <!-- AOS LIB -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+</head>
+
+<body>
+  <header class="header-container">
+    <nav class="navbar-container navbar-band">
+      <nav class="navbar-container navbar-band">
+        <a href="index.html"><img class="logo" src="../img/logo.png" alt="Logo"></a>
+        <a class="hvr-grow hvr-underline-from-center" href="index.html"><i class="fas fa-home"></i>HOME</a>
+        <a class="hvr-grow hvr-underline-from-center" href="play.html"><i class="fa fa-fire"
+            aria-hidden="true"></i>PLAY</a>
+        <a class="hvr-grow hvr-underline-from-center" href="leaderboard.html"><i class="fas fa-trophy"
+            aria-hidden="true"></i>LEADERBOARD</a>
+        <a class="hvr-grow hvr-underline-from-center" href="inscription.html"><i aria-hidden="true"></i>Connexion</a>
+      </nav>
+    </nav>
+  </header>
+
+  <div class="main-inscription">
+    <div class="container">
+      <div class="logoUtilisateur">
+        <i class="fas fa-user"></i>
+      </div>
+
+      <div class="tab-body" data-id="connexion">
         <form id="loginForm" action="">
-            <input id="username" autocomplete="off" placeholder="Username" />
-            <input type="submit" value="Se connecter!"/>
+          <div class="row">
+            <i class="far fa-user"></i>
+            <input id="username" autocomplete="off" placeholder="Nom d'Utilisateur" class="input" />
+          </div>
+          <div class="row">
+            <i class="fas fa-lock"></i>
+            <input id="password" autocomplete="off" placeholder="Mot de Passe" class="input" />
+          </div>
+          <input type="submit" value="Se connecter!" class="btn" />
         </form>
-    </body>
-    <script src="../js/modules/logger.js"></script>
-    <script src="../js/login.js"></script>
+      </div>
+
+      <div class="tab-body" data-id="inscription">
+        <form id="registerForm">
+          <div class="row">
+            <i class="far fa-user"></i>
+            <input id="Rusername" autocomplete="off" placeholder="Nom d'Utilisateur" class="input">
+          </div>
+          <div class="row">
+            <i class="fas fa-lock"></i>
+            <input id="Rpassword" autocomplete="off" placeholder="Mot de Passe" class="input">
+          </div>
+          <div class="row">
+            <i class="fas fa-lock"></i>
+            <input id="Rpassword2" autocomplete="off" placeholder="Confirmation MDP" class="input">
+          </div>
+          <input type="submit" value="S'inscrire!" class="btn" />
+        </form>
+      </div>
+
+      <div class="tab-footer">
+        <a class="tab-link active" data-ref="connexion" href="javascript:void(0)">Connexion</a>
+        <a class="tab-link" data-ref="inscription" href="javascript:void(0)">Inscription</a>
+      </div>
+    </div>
+  </div>
+</body>
+<!--posez pas question c'est ici c'est tout-->
+<script src="../js/modules/logger.js"></script>
+<script src="../js/login.js"></script>
 </html>
