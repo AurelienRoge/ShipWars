@@ -10,11 +10,12 @@ class Player{
         this.attackMode = "Missile";
     }
 
-
+    //Renvoit l'id socket io du joueur
     getID(){
         return this.id;
     }
 
+    //Vérifie si l'arme entrée en paramètre est utilisée ou pas
     weaponHasBeenUsed(weapon){
         switch(weapon){
             case "Radar":
@@ -31,6 +32,7 @@ class Player{
         }
     }
 
+    //Permet de voir si l'arme a été utilisée
     getWeaponUsed(){
         return{
             radar : this.radar,
@@ -39,6 +41,7 @@ class Player{
         };
     }
 
+    //Permet de voir si l'arme a été utilisée V2 (oui c'est un peu bete)
     isWeaponUsed(weapon){
         switch(weapon){
             case "Missile":
@@ -54,15 +57,17 @@ class Player{
         }
     }
 
+    //Obtenir l'arme du joueur
     getAttackMode(){
         return this.attackMode;
     }
-
+    
+    //Change l'arme du joueur
     changeAttackMode(newMode) {
         this.attackMode = newMode;
         console.log("Player " + this.id + "changed weapon to " + newMode);
     }
 }
 
-
+//Exporte la classe
 module.exports = Player;

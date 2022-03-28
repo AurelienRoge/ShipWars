@@ -311,10 +311,12 @@ class shipWarsGame {
         }
     }
 
+    //Retourne c'est au tour de quel joueur de jouer
     getPlayerTurn() {
         return this.playerTurn;
     }
 
+    //Retourne si l'arme a été utilisée par le joueur
     weaponUsed(player, weapon) {
 
         switch (weapon) {
@@ -331,7 +333,7 @@ class shipWarsGame {
         }
     }
 
-
+    //Retourne si l'arme est disponible ou pas
     isWeaponAvailable(player, weapon) {
         switch (weapon) {
             case "Radar":
@@ -358,7 +360,7 @@ class shipWarsGame {
         }
     }
 
-
+    //Retourne si la carte est terminée
     isMapFinished(GameMap) {
         //On vérifie s'il reste des cases bateau dans le tableau
         for (let i = 0; i < GameMap.length; i++) {
@@ -382,6 +384,7 @@ class shipWarsGame {
         }
     }
 
+    //Annule la partie
     abortGame(player) {
         //Donne la victoire à l'opposant
         this.gameStatus = 2;
@@ -416,14 +419,16 @@ class shipWarsGame {
         return this.winner;
     }
 
+    //Retourne l'id du gagnant
     getWinner() {
         return this.winner;
     }
-    //La fonction retourne l'id du joueur
+    //La fonction retourne l'id du perdant
     getLoser() {
         return this.loser;
     }
 
+    //Retourne la grille de l'adversaire sans les bateaux
     getOpponentGridWithShipsHidden(player) {
         if (player === 0) {
             let tmp = Array.from(this.GameMapPlayer1);
@@ -445,6 +450,7 @@ class shipWarsGame {
         }
     }
 
+    //Retourne la grille du joueur
     getSelfGridOnlyBoats(player) {
         if (player === 0) {
             let tmp = Array.from(this.GameMapPlayer0);
@@ -456,6 +462,7 @@ class shipWarsGame {
         }
     }
 
+    //Retourne la grille du joueur V2
     getGameMap(player) {
         if (player == 0) { return this.GameMapPlayer0 } else { return this.GameMapPlayer1 }
     }
@@ -465,10 +472,12 @@ class shipWarsGame {
         return this.playerTurn;
     }
 
+    //Change l'arme du joueur
     changeAttackMode(userNb, newMode) {
         this.players[userNb].changeAttackMode(newMode);
     }
 
+    //Trouve quel bateau est attaqué
     findWhichShipIsAttacked(GameMap, index) {
         for (let i = 0; i < GameMap.shipList.length; i++) {
             for (let j = 0; j < GameMap.shipList[i].getTilesIndex().length; j++) {
@@ -494,10 +503,12 @@ class shipWarsGame {
 
     }
 
+    // 1 = in game 2 = game over
     getGameStatus() {
-        return this.gameStatus; // 1 = in game 2 = game over
+        return this.gameStatus; 
     }
 
+    //Retourne si le bateau a été coulé ou non
     shipHasBeenSunked(ship, GameMap) {
         if (ship.isShipDestroyed()) {
             for (let i of ship.getTilesIndex()) {

@@ -33,22 +33,27 @@ class ship {
         return this.orientation;
     }
 
+    //Ajoute la case au tableau les répertoriant
     addInTilesIndex(index){
         this.TilesIndex.push(index);
     }
 
+    //Récupère le tableau des cases du bateau
     getTilesIndex(){
         return this.TilesIndex;
     }
 
+    //Ajoute la case au tableau répertoriant les cases détruites
     tileHasBeenDestroyed(index){
         this.tilesDestroyedIndex.push(index);
     }
 
+        //Récupère le tableau des cases détruites du bateau
     getTilesDestroyedIndex(){
         return this.tilesDestroyedIndex;
     }
 
+    //Permet de savoir si le bateau est détruit
     isShipDestroyed(){
         if(this.TilesIndex.length == this.tilesDestroyedIndex.length){
             return true;
@@ -56,6 +61,7 @@ class ship {
         return false;
     }
 
+    //Détruit le bateau
     destroyShip(){
         this.tilesDestroyedIndex = this.TilesIndex;
     }
@@ -119,5 +125,5 @@ class ship {
     }
 }
 
-
+//Exporte la classe bateau
 module.exports = ship;

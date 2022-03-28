@@ -86,7 +86,7 @@ io.on('connection', function (socket) {
       game.changeAttackMode(users[socket.id].player, weapon);
     }
   })
-  
+
   joinWaitingPlayers();
 });
 
@@ -96,9 +96,9 @@ function joinWaitingPlayers() {
   let players = getClientsInRoom('queue');
 
   if (players.length >= 2) {
-    // 2 player waiting. Create new game!
+    // 2 joueurs en attente, on créer une partie
     let game = new shipWarsGame(gameIdCounter++, players[0], players[1]);
-    // create new room for this game
+    // on créer une room pour la partie
     io.sockets.sockets.get(players[0]).leave('queue');
     io.sockets.sockets.get(players[1]).leave('queue');
     io.sockets.sockets.get(players[0]).join('game' + game.getGameId());
@@ -112,7 +112,7 @@ function joinWaitingPlayers() {
 
     io.to('game' + game.getGameId()).emit('join', game.getGameId());
 
-    // send initial ship placements
+    // on envoit la position des bateaux
     io.to(players[0]).emit('update', game.getGameMap(0), game.getGrid(1, 0), 0, game.getPlayerTurn());
     io.to(players[1]).emit('update', game.getGameMap(1), game.getGrid(0, 1), 1, game.getPlayerTurn());
 
@@ -136,7 +136,7 @@ function leaveGame(socket) {
     console.log((new Date().toISOString()) + ' ID ' + socket.id + ' left game ID ' + users[socket.id].inGame.getGameId());
 
     if (users[socket.id].inGame.getGameStatus() !== 2) {
-      // Game is unfinished, abort it.
+      // La partie n'est pas terminée, on l'annule
       console.log("Game aborted");
       users[socket.id].inGame.abortGame(users[socket.id].player);
       console.log("users[socket.id]");
