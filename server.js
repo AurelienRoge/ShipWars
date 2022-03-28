@@ -164,7 +164,7 @@ function checkGameOver(game) {
 }
 
 
-http.listen(4444, () => {
-  console.log('Serveur lancé sur le port 4444');
+http.listen(4200, () => {
+  console.log('Serveur lancé sur le port 4200');
 });
 
