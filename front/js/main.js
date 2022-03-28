@@ -1,4 +1,3 @@
-//2,3 trucs par défaut du prof, certains peuvent être supp
 let socket = io();
 
 let chatForm = document.getElementById('chatForm');
