@@ -20,7 +20,6 @@ class shipWarsGame {
 
         this.gameStatus = 1; //1 = in game ; 2 = game over
 
-
         this.players = [new Player(idPlayer0), new Player(idPlayer1)];
 
         //Initialisation des cartes
@@ -35,6 +34,12 @@ class shipWarsGame {
 
     getPlayer(index) {
         return this.players[index]
+    }
+
+    getOpponent(player) {
+        let opponent;
+        player == 0 ? opponent = 1 : opponent = 0;
+        return opponent;
     }
 
     getGameId() {
@@ -96,34 +101,29 @@ class shipWarsGame {
                     switch (GameMap[index]) {
                         case "B"://Si c'est un bateau, on indique qu'on a touché dans le tableau -> T
                             GameMap[index] = "T";
-                            console.log("Touché !")
+
                             this.findWhichShipIsAttacked(GameMap, index).tileHasBeenDestroyed(index);
+
                             if (this.findWhichShipIsAttacked(GameMap, index).isShipDestroyed() == true) {
-                                console.log("Coulé !")
+                                this.shipHasBeenSunked(this.findWhichShipIsAttacked(GameMap, index), GameMap);
                             }
                             break;
                         case "BR"://Si c'est un bateau, on indique qu'on a touché dans le tableau -> T
                             GameMap[index] = "T";
-                            console.log("Touché !")
                             this.findWhichShipIsAttacked(GameMap, index).tileHasBeenDestroyed(index);
                             if (this.findWhichShipIsAttacked(GameMap, index).isShipDestroyed() == true) {
-                                console.log("Coulé !")
+                                this.shipHasBeenSunked(this.findWhichShipIsAttacked(GameMap, index), GameMap);
                             }
                             break;
                         case "V"://Si c'est une case vide, on indique qu'on a raté -> R et le tour passe au joueur adverse
                             GameMap[index] = "R";
-                            console.log("Raté !")
                             this.changePlayerTurn();
                             break;
                         case "VR"://Si c'est une case vide, on indique qu'on a raté -> R et le tour passe au joueur adverse
                             GameMap[index] = "R";
-                            console.log("Raté !")
                             this.changePlayerTurn();
                             break;
                     }
-                }
-                else {
-                    console.log("Tir impossible sur cette case !");
                 }
                 break;
 
@@ -146,7 +146,6 @@ class shipWarsGame {
                     this.changeAttackMode(this.getPlayerTurn(), "Missile");
                     this.changePlayerTurn();
                 }
-                else { console.log("Plus de charge pour cette arme !") }
                 break;
 
 
@@ -158,29 +157,27 @@ class shipWarsGame {
                             for (let i = 0; i < this.findWhichShipIsAttacked(GameMap, index).getTilesIndex().length; i++) {
                                 GameMap[this.findWhichShipIsAttacked(GameMap, index).getTilesIndex()[i]] = "T";
                             }
-                            console.log("Coulé !")
+                            this.shipHasBeenSunked(this.findWhichShipIsAttacked(GameMap, index), GameMap);
                         }
 
                         else {
                             switch (GameMap[index]) {
                                 case "B"://Si c'est un bateau, on indique qu'on a touché dans le tableau -> T
                                     GameMap[index] = "T";
-                                    console.log("Touché !")
+                                    this.findWhichShipIsAttacked(GameMap, index).tileHasBeenDestroyed(index);
 
                                     break;
                                 case "BR"://Si c'est un bateau, on indique qu'on a touché dans le tableau -> T
                                     GameMap[index] = "T";
-                                    console.log("Touché !");
+                                    this.findWhichShipIsAttacked(GameMap, index).tileHasBeenDestroyed(index);
 
                                     break;
                                 case "V"://Si c'est une case vide, on indique qu'on a raté -> R et le tour passe au joueur adverse
                                     GameMap[index] = "R";
-                                    console.log("Raté !");
 
                                     break;
                                 case "VR"://Si c'est une case vide, on indique qu'on a raté -> R et le tour passe au joueur adverse
                                     GameMap[index] = "R";
-                                    console.log("Raté !");
 
                                     break;
                             }
@@ -193,7 +190,6 @@ class shipWarsGame {
                     this.changeAttackMode(this.getPlayerTurn(), "Missile");
                     this.changePlayerTurn();
                 }
-                else { console.log("Plus de charge pour cette arme !") }
                 break;
 
             case "Bombe":
@@ -202,19 +198,28 @@ class shipWarsGame {
                         switch (GameMap[index + i]) {
                             case "B"://Si c'est un bateau, on indique qu'on a touché dans le tableau -> T
                                 GameMap[index + i] = "T";
-                                console.log("Touché !")
+                                this.findWhichShipIsAttacked(GameMap, index + i).tileHasBeenDestroyed(index + i);
+
+                                if (this.findWhichShipIsAttacked(GameMap, index + i).isShipDestroyed() == true) {
+                                    this.shipHasBeenSunked(this.findWhichShipIsAttacked(GameMap, index + i), GameMap);
+                                }
                                 break;
                             case "BR"://Si c'est un bateau, on indique qu'on a touché dans le tableau -> T
                                 GameMap[index + i] = "T";
-                                console.log("Touché !")
+                                this.findWhichShipIsAttacked(GameMap, index + i).tileHasBeenDestroyed(index + i);
+
+                                if (this.findWhichShipIsAttacked(GameMap, index + i).isShipDestroyed() == true) {
+                                    this.shipHasBeenSunked(this.findWhichShipIsAttacked(GameMap, index + i), GameMap);
+                                }
+
                                 break;
                             case "V"://Si c'est une case vide, on indique qu'on a raté -> R et le tour passe au joueur adverse
                                 GameMap[index + i] = "R";
-                                console.log("Raté !")
+
                                 break;
                             case "VR"://Si c'est une case vide, on indique qu'on a raté -> R et le tour passe au joueur adverse
                                 GameMap[index + i] = "R";
-                                console.log("Raté !")
+
                                 break;
                         }
                     }
@@ -223,25 +228,34 @@ class shipWarsGame {
                         case "B"://Si c'est un bateau, on indique qu'on a touché dans le tableau -> T
                             if ((index - 1) % 10 != 9) {
                                 GameMap[index - 1] = "T";
-                                console.log("Touché !")
+                                this.findWhichShipIsAttacked(GameMap, index - 1).tileHasBeenDestroyed(index - 1);
+
+                                if (this.findWhichShipIsAttacked(GameMap, index - 1).isShipDestroyed() == true) {
+                                    this.shipHasBeenSunked(this.findWhichShipIsAttacked(GameMap, index - 1), GameMap);
+                                }
                             }
                             break;
                         case "BR"://Si c'est un bateau, on indique qu'on a touché dans le tableau -> T
                             if ((index - 1) % 10 != 9) {
                                 GameMap[index - 1] = "T";
-                                console.log("Touché !");
+                                this.findWhichShipIsAttacked(GameMap, index - 1).tileHasBeenDestroyed(index - 1);
+
+                                if (this.findWhichShipIsAttacked(GameMap, index - 1).isShipDestroyed() == true) {
+                                    this.shipHasBeenSunked(this.findWhichShipIsAttacked(GameMap, index - 1), GameMap);
+                                }
+
                             }
                             break;
                         case "V"://Si c'est une case vide, on indique qu'on a raté -> R et le tour passe au joueur adverse
                             if ((index - 1) % 10 != 9) {
                                 GameMap[index - 1] = "R";
-                                console.log("Raté !");
+
                             }
                             break;
                         case "VR"://Si c'est une case vide, on indique qu'on a raté -> R et le tour passe au joueur adverse
                             if ((index - 1) % 10 != 9) {
                                 GameMap[index - 1] = "R";
-                                console.log("Raté !");
+
                             }
                             break;
                     }
@@ -249,25 +263,31 @@ class shipWarsGame {
                         case "B"://Si c'est un bateau, on indique qu'on a touché dans le tableau -> T
                             if ((index + 1) % 10 != 0) {
                                 GameMap[index + 1] = "T";
-                                console.log("Touché !")
+                                this.findWhichShipIsAttacked(GameMap, index + 1).tileHasBeenDestroyed(index + 1);
+
+                                if (this.findWhichShipIsAttacked(GameMap, index + 1).isShipDestroyed() == true) {
+                                    this.shipHasBeenSunked(this.findWhichShipIsAttacked(GameMap, index + 1), GameMap);
+                                }
                             }
                             break;
                         case "BR"://Si c'est un bateau, on indique qu'on a touché dans le tableau -> T
                             if ((index + 1) % 10 != 0) {
                                 GameMap[index + 1] = "T";
-                                console.log("Touché !");
+                                this.findWhichShipIsAttacked(GameMap, index + 1).tileHasBeenDestroyed(index + 1);
+
+                                if (this.findWhichShipIsAttacked(GameMap, index + 1).isShipDestroyed() == true) {
+                                    this.shipHasBeenSunked(this.findWhichShipIsAttacked(GameMap, index + 1), GameMap);
+                                }
                             }
                             break;
                         case "V"://Si c'est une case vide, on indique qu'on a raté -> R et le tour passe au joueur adverse
                             if ((index + 1) % 10 != 0) {
                                 GameMap[index + 1] = "R";
-                                console.log("Raté !");
                             }
                             break;
                         case "VR"://Si c'est une case vide, on indique qu'on a raté -> R et le tour passe au joueur adverse
                             if ((index + 1) % 10 != 0) {
                                 GameMap[index + 1] = "R";
-                                console.log("Raté !");
                             }
                             break;
                     }
@@ -276,7 +296,7 @@ class shipWarsGame {
                     this.changeAttackMode(this.getPlayerTurn(), "Missile");
                     this.changePlayerTurn();
                 }
-                else { console.log("Plus de charge pour cette arme !") }
+
                 break;
         }
     }
@@ -353,6 +373,8 @@ class shipWarsGame {
     //On vérifie les deux cartes pour voir si la partie est terminée
     isGameFinished() {
         if (this.isMapFinished(this.GameMapPlayer0) || this.isMapFinished(this.GameMapPlayer1)) {
+            this.setWinner();
+            this.gameStatus = 2;
             return true
         }
         else {
@@ -360,68 +382,51 @@ class shipWarsGame {
         }
     }
 
-    //Pour réinitialiser la partie
-    resetGame() {
-        this.initializeRandomMap(this.GameMapPlayer0);
-        this.initializeRandomMap(this.GameMapPlayer1);
-        this.playerTurn = 0;
-        this.winner = undefined;
-        this.loser = undefined;
-        this.gameStatus = 1;
-    }
-
     abortGame(player) {
         //Donne la victoire à l'opposant
         this.gameStatus = 2;
-        this.winner = player === 0 ? 1 : 0;
+        if (player == 0) {
+            this.winner = this.players[1].getID();
+            this.loser = this.players[0].getID();
+        }
+        else {
+            this.winner = this.players[0].getID();
+            this.loser = this.players[1].getID();
+        }
     }
+
 
     //On vérifie chaque carte, si la carte du joueur 1 est finie (= il n'y a plus de bateau), alors le joueur 0 gagne et inversement
     //La fonction retourne l'id du joueur
-    getWinner() {
+    setWinner() {
         if (this.isMapFinished(this.GameMapPlayer0)) {
-            this.winner = this.players[0].getID(); //Le gagnant est le joueur 1
+            this.winner = this.players[1].getID(); //Le gagnant est le joueur 1
+            this.loser = this.players[0].getID();//Le perdant est le joueur 0
             return this.winner;
         }
 
         if (this.isMapFinished(this.GameMapPlayer1)) {
             this.winner = this.players[0].getID(); //Le gagnant est le joueur 0
+            this.loser = this.players[1].getID();//Le perdant est le joueur 1
             return this.winner;
         }
 
         this.winner = undefined //Sinon, il n'y a pas de gagnant
+        this.loser = undefined //Sinon, il n'y a pas de perdant
         return this.winner;
     }
 
+    getWinner() {
+        return this.winner;
+    }
     //La fonction retourne l'id du joueur
     getLoser() {
-        if (this.isMapFinished(this.GameMapPlayer0)) {
-            this.loser = this.players[0].getID(); //Le perdant est le joueur 0
-            return this.loser;
-        }
-
-        if (this.isMapFinished(this.GameMapPlayer1)) {
-            this.winner = this.players[0].getID(); //Le perdant est le joueur 1
-            return this.loser;
-        }
-
-        this.loser = undefined //Sinon, il n'y a pas de gagnant
         return this.loser;
-    }
-
-    //Pour obtenir la carte du joueur 0
-    getGameMapPlayer0() {
-        return this.GameMapPlayer0;
-    }
-
-    //Pour obtenir la carte du joueur 1
-    getGameMapPlayer1() {
-        return this.GameMapPlayer1;
     }
 
     getOpponentGridWithShipsHidden(player) {
         if (player === 0) {
-            let tmp = Array.from(this.getGameMapPlayer1());
+            let tmp = Array.from(this.GameMapPlayer1);
             for (let j = 0; j < 100; j++) {
                 if (tmp[j] == "B") {
                     tmp[j] == "V"
@@ -430,7 +435,7 @@ class shipWarsGame {
             return tmp;
         }
         else {
-            let tmp = Array.from(this.getGameMapPlayer0());
+            let tmp = Array.from(this.GameMapPlayer0);
             for (let j = 0; j < 100; j++) {
                 if (tmp[j] == "B") {
                     tmp[j] == "V"
@@ -440,29 +445,13 @@ class shipWarsGame {
         }
     }
 
-    getSelfGridOnlyBoats(player){
+    getSelfGridOnlyBoats(player) {
         if (player === 0) {
-            let tmp = Array.from(this.getGameMapPlayer0());
-            for (let j = 0; j < 100; j++) {
-                if (tmp[j] == "BR") {
-                    tmp[j] = "B"
-                }
-                if(tmp[j] == "VR"){
-                    tmp[j] = "V"
-                }
-            }
+            let tmp = Array.from(this.GameMapPlayer0);
             return tmp;
         }
         else {
-            let tmp = Array.from(this.getGameMapPlayer1());
-            for (let j = 0; j < 100; j++) {
-                if (tmp[j] == "BR") {
-                    tmp[j] = "B"
-                }
-                if(tmp[j] == "VR"){
-                    tmp[j] = "V"
-                }
-            }
+            let tmp = Array.from(this.GameMapPlayer1);
             return tmp;
         }
     }
@@ -491,20 +480,9 @@ class shipWarsGame {
     }
 
 
-    getGameState(player, gridOwner) {
-        return {
-            turn: this.playerTurn === player,
-            gridIndex: player === gridOwner ? 0 : 1,
-            grid: this.getGrid(gridOwner, player !== gridOwner)
-        }
-    }
-
-
     //Renvoie la grille selon les paramètres : gridowner : qui possède la grille ; hideShips : qui observe la grille 
     getGrid(gridOwner, hideShips) {
         let gridToReturn = Array.from(this.getGameMap(gridOwner));
-        /*console.log("gridOwner != hideShips")
-        console.log(gridOwner != hideShips)*/
         if (gridOwner != hideShips) {//On cache les bateaux avant d'envoyer la carte si on doit envoyer la carte du joueur adverse
             for (let i = 0; i < gridToReturn.length; i++) {
                 if (gridToReturn[i] == "B") {
@@ -518,6 +496,14 @@ class shipWarsGame {
 
     getGameStatus() {
         return this.gameStatus; // 1 = in game 2 = game over
+    }
+
+    shipHasBeenSunked(ship, GameMap) {
+        if (ship.isShipDestroyed()) {
+            for (let i of ship.getTilesIndex()) {
+                GameMap[i] = "S"
+            }
+        }
     }
 
 }

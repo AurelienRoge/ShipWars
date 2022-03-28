@@ -56,10 +56,10 @@ leaveGame(socket)
 joinWaitingPlayers() -> il reste à débugguer pour les rooms pour réussir à les créer
 27/03/22:
 à faire
-déconnexion
+déconnexion FAIT
 fin de partie FAIT
 graphique = pas innerHTML mais classe FAIT
-reset le graphique entre les parties FAIT (sauf message de tour à fix)
+reset le graphique entre les parties FAIT (sauf message de tour à fix) FAIT
 
 28/03/22
-fix le message de tour
+fix le message de tour FAIT

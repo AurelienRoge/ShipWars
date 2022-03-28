@@ -1,93 +1,116 @@
-#gametablePlayer0{
+#gametablePlayer0 {
     background-color: white;
     border-collapse: collapse;
 }
 
-#gametablePlayer1{
+#gametablePlayer1 {
     background-color: white;
     border-collapse: collapse;
 }
 
-#divTwoTabs{
+#divTwoTabs {
     display: flex;
     align-items: center;
     justify-content: space-around;
 }
 
-#weaponSelectionBtn{
+#weaponSelectionBtn {
     display: flex;
     justify-content: center;
 }
 
-.gametile{
+.gametile {
     width: 25px;
     height: 25px;
     border: solid 1px black;
     margin: 0;
 }
 
-.colheader{
+.colheader {
     text-align: center;
 }
 
-.weaponBtn{
+.weaponBtn {
     margin: 5px;
     width: 100px;
     height: 50px;
 }
 
+
+
+/*Copie à partir d'ici */
+/*Barre pour indiquer le tour du joueur et quand la partie est terminée */
 #turn-status {
     padding: 10px 0px;
     margin: 25px 0 0 0;
 }
 
+/*Lien pour relancer une partie*/
 #turn-status a {
     font-weight: bold;
     text-decoration: underline;
 }
 
+/*Cadre quand c'est au tour du joueur */
 .alert-your-turn {
     color: #31708f;
     background-color: #d9edf7;
     border-color: #bce8f1;
 }
 
+/*Cadre quand c'est au tour de l'adversaire */
 .alert-opponent-turn {
     color: #767676;
     background-color: #f0f0f0;
     border-color: #e9e9e9;
 }
 
+/*Cadre quand le joueur a gagné */
 .alert-winner {
     color: #3c763d;
     background-color: #dff0d8;
     border-color: #d6e9c6;
 }
 
+/*Cadre quand le joueur a perdu*/
 .alert-loser {
     color: #a94442;
     background-color: #f2dede;
     border-color: #ebccd1;
 }
 
+/*Bouton pour quitter la partie*/
+.btn-leave-game{
+    background-color : orange;
+}
 
-/* Boat tile */
-.Boat{
+
+/* Case bateau */
+.Boat {
     background-color: #78300a;
 }
 
-.Missed{
-    background-color: gray ;
+/* Case tir manqué */
+.Missed {
+    background-color: gray;
 }
 
-.Hit{
+/* Case touché */
+.Hit {
     background-color: red;
 }
 
-.RadarBoat{
+/* Case coulé */
+.Sunked {
+    background-color: black;
+}
+
+/* Case radar ayant trouvé un bateau */
+.RadarBoat {
     background-color: orange;
 }
 
-.RadarEmpty{
+/* Case radar vide */
+.RadarEmpty {
     background-color: rgba(0, 255, 0, 0.5);
 }

@@ -20,10 +20,11 @@ io.on('connection', function (socket) {
   //Création d'objet user pour des données en plus
   users[socket.id] = {
     inGame: null,
-    player: null
+    player: null,
+    opponent: null
   };
 
-  // join queue until there are enough players to start a new game
+  // Rejoint la file d'attente jusqu'à trouver un adversaire
   socket.join('queue');
 
 
@@ -41,13 +42,12 @@ io.on('connection', function (socket) {
   //Déconnexion de l'utilisateur
   socket.on('disconnect', function () {
     console.log('user disconnected');
-
     leaveGame(socket);
     delete users[socket.id];
   });
 
 
-  //recevoir le tir du côté client AMODIFIER
+  //recevoir le tir du côté client
   socket.on('shot', function (index) {
     let game = users[socket.id].inGame;
     let opponent;
@@ -60,19 +60,15 @@ io.on('connection', function (socket) {
         currentPlayer = game.getPlayerTurn();
         //Si son arme est valide (=il a encore une charge dedans)
         if (!game.getPlayer(users[socket.id].player).isWeaponUsed(game.getPlayer(users[socket.id].player).getAttackMode())) {
-          console.log(game.isGameFinished())
           if (!game.isGameFinished()) {
             game.playerAttack(index, game.getGameMap(opponent));
 
             // Update game grids on both clients
-            io.to(game.getPlayerId(currentPlayer)).emit('update', game.getSelfGridOnlyBoats(currentPlayer), game.getOpponentGridWithShipsHidden(currentPlayer), currentPlayer, currentPlayer);
-            io.to(game.getPlayerId(opponent)).emit('update', game.getSelfGridOnlyBoats(opponent), game.getOpponentGridWithShipsHidden(opponent), opponent, currentPlayer);
+            io.to(game.getPlayerId(currentPlayer)).emit('update', game.getSelfGridOnlyBoats(currentPlayer), game.getOpponentGridWithShipsHidden(currentPlayer), currentPlayer, game.getPlayerTurn());
+            io.to(game.getPlayerId(opponent)).emit('update', game.getSelfGridOnlyBoats(opponent), game.getOpponentGridWithShipsHidden(opponent), opponent, game.getPlayerTurn());
 
             if (game.isGameFinished()) {
-              console.log("Game finished");
-              let winnerId = game.getWinner();
-              io.to(game.getPlayerId(currentPlayer)).emit('gameover', game.getPlayerId(currentPlayer), winnerId);
-              io.to(game.getPlayerId(opponent)).emit('gameover', game.getPlayerId(opponent), winnerId);
+              checkGameOver(game);
             }
           }
         }
@@ -89,11 +85,8 @@ io.on('connection', function (socket) {
 
       game.changeAttackMode(users[socket.id].player, weapon);
     }
-
-
   })
-
-
+  
   joinWaitingPlayers();
 });
 
@@ -112,6 +105,8 @@ function joinWaitingPlayers() {
     io.sockets.sockets.get(players[1]).join('game' + game.getGameId());
     users[players[0]].player = 0;
     users[players[1]].player = 1;
+    users[players[0]].opponent = 1;
+    users[players[1]].opponent = 0;
     users[players[0]].inGame = game;
     users[players[1]].inGame = game;
 
@@ -140,14 +135,13 @@ function leaveGame(socket) {
   if (users[socket.id].inGame !== null) {
     console.log((new Date().toISOString()) + ' ID ' + socket.id + ' left game ID ' + users[socket.id].inGame.getGameId());
 
-    // Notifty opponent
-    socket.broadcast.to('game' + users[socket.id].inGame.getGameId()).emit('notification', {
-      message: 'Opponent has left the game'
-    });
-
     if (users[socket.id].inGame.getGameStatus() !== 2) {
       // Game is unfinished, abort it.
+      console.log("Game aborted");
       users[socket.id].inGame.abortGame(users[socket.id].player);
+      console.log("users[socket.id]");
+      console.log(users[socket.id]);
+      io.to(users[socket.id].inGame.getPlayerId(users[socket.id].opponent)).emit('gameover', users[socket.id].inGame.getWinner(), users[socket.id].inGame.getWinner());
       checkGameOver(users[socket.id].inGame);
     }
 
@@ -164,8 +158,8 @@ function leaveGame(socket) {
 function checkGameOver(game) {
   if (game.getGameStatus() === 2) {
     console.log((new Date().toISOString()) + ' Game ID ' + game.getGameId() + ' ended.');
-    io.to(game.getWinner()).emit('gameover', true);
-    io.to(game.getLoser()).emit('gameover', false);
+    io.to(game.getWinner()).emit('gameover', game.getWinner(), game.getWinner());
+    io.to(game.getLoser()).emit('gameover', game.getLoser(), game.getWinner());
   }
 }
 
@@ -173,6 +167,4 @@ function checkGameOver(game) {
 http.listen(4200, () => {
   console.log('Serveur lancé sur le port 4200');
 });
-
-
 

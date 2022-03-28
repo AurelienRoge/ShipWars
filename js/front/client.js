@@ -32,16 +32,20 @@ $(function() {
   
     //Mise a jour du tour de jeu
     socket.on('update', function(selfGrid, opponentGrid, player, playerTurn) {
-      view.setTurn(player, playerTurn)
+      view.setTurn(player, playerTurn);
       view.updateGrids(selfGrid, opponentGrid);
       view.linkTabToGraph();
     });
   
-    //Fin de partie (AMODIFIER POUR FAIRE APPARAITRE DES ELEMENTS SUR L HTML)
+    //Fin de partie 
     socket.on('gameover', function(player, winner) {
-      console.log("partie terminée");
       let isWinner;
-      player == winner ? isWinner = true : isWinner = false;
+      if(player == winner){
+        isWinner = true;
+      }
+      else{
+        isWinner = false;
+      }
       view.setGameOver(isWinner);
     });
     
@@ -66,6 +70,7 @@ $(function() {
     socket.emit('shot', index);
   }
 
+  //Change l'arme du joueur
   function changeWeapon(weapon) {
     socket.emit('changeWeapon', weapon);
 }
