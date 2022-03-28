@@ -5,8 +5,8 @@
 /***************
 * Base
 ****************/
-.backgroundcolor {
-    background-image: url(../img/fond_etoiles.jpg);
+.backgroundleaderboard {
+    background-image: url(../img/leaderboard.png);
     background-size: cover;
 
 }
@@ -111,7 +111,7 @@
   .container-table100 {
     width: 100%;
     min-height: 50vh;
-    background-color: #143666;
+
   
     display: -webkit-box;
     display: -webkit-flex;
@@ -134,7 +134,7 @@
     background: white;
     border-radius: 10px;
     overflow: hidden;
-    width: 100%;
+    width: 70%;
     margin: 0 auto;
     position: relative;
   }
@@ -155,7 +155,7 @@
     border: 0;
   }
   table td, table th {
-    text-align: left;
+    text-align: center;
   }
   table td.l, table th.l {
     text-align: right;

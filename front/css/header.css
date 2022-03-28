@@ -1,5 +1,5 @@
 .logo {
-   height: 50px;
+   height: 100px;
 }
 
 .header-container {
@@ -14,7 +14,7 @@
 }
 
 .header-background {
-    background-image: url("../img/header.jpg");
+    background-image: url("../img/fond_accueil.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
