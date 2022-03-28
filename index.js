@@ -24,7 +24,7 @@ const { body, validationResult } = require('express-validator');
 /**** Import project libs ****/
 
 const states = require('./back/modules/states');
-const Theoden = require('./back/models/Theoden');
+const Theoden = require('./back/models/Theoden'); //jsp pourquoi je l'ai gardé mais ok
 
 
 
@@ -170,7 +170,7 @@ app.post('/register', body('register'), (req, res) => {
         }
     }
 });
-
+//certaines interactions SQL peuvent être mieux optimisés mais bon
 
 
 ///*

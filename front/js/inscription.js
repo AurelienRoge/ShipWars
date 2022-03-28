@@ -1,3 +1,4 @@
+//POUR L'AFFICHAGE LOGIN / REGISTER
 let tabs = document.querySelectorAll(".tab-link:not(.desactive)");
 
 tabs.forEach((tab) => {
