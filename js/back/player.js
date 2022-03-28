@@ -15,6 +15,22 @@ class Player{
         return this.id;
     }
 
+    weaponHasBeenUsed(weapon){
+        switch(weapon){
+            case "Radar":
+                this.radar = true;
+                break;
+            
+            case "Torpille":
+                this.torpille = true;
+                break;
+            
+            case "Bombe":
+                this.bombe = true;
+                break;
+        }
+    }
+
     getWeaponUsed(){
         return{
             radar : this.radar,

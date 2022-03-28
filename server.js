@@ -59,15 +59,24 @@ io.on('connection', function (socket) {
         opponent = game.getPlayerTurn() === 0 ? 1 : 0;
         currentPlayer = game.getPlayerTurn();
         //Si son arme est valide (=il a encore une charge dedans)
-        if(!game.getPlayer(users[socket.id].player).isWeaponUsed(game.getPlayer(users[socket.id].player).getAttackMode())){
-          game.playerAttack(index, game.getGameMap(opponent));
-  
+        if (!game.getPlayer(users[socket.id].player).isWeaponUsed(game.getPlayer(users[socket.id].player).getAttackMode())) {
+          console.log(game.isGameFinished())
+          if (!game.isGameFinished()) {
+            game.playerAttack(index, game.getGameMap(opponent));
+
             // Update game grids on both clients
-            io.to(game.getPlayerId(currentPlayer)).emit('update', game.getGameMap(currentPlayer), game.getOpponentGridWithShipsHidden(currentPlayer));
-            io.to(game.getPlayerId(opponent)).emit('update', game.getGameMap(opponent), game.getOpponentGridWithShipsHidden(opponent));
-          
+            io.to(game.getPlayerId(currentPlayer)).emit('update', game.getSelfGridOnlyBoats(currentPlayer), game.getOpponentGridWithShipsHidden(currentPlayer), currentPlayer, currentPlayer);
+            io.to(game.getPlayerId(opponent)).emit('update', game.getSelfGridOnlyBoats(opponent), game.getOpponentGridWithShipsHidden(opponent), opponent, currentPlayer);
+
+            if (game.isGameFinished()) {
+              console.log("Game finished");
+              let winnerId = game.getWinner();
+              io.to(game.getPlayerId(currentPlayer)).emit('gameover', game.getPlayerId(currentPlayer), winnerId);
+              io.to(game.getPlayerId(opponent)).emit('gameover', game.getPlayerId(opponent), winnerId);
+            }
+          }
         }
-        
+
       }
     }
   });
@@ -109,8 +118,8 @@ function joinWaitingPlayers() {
     io.to('game' + game.getGameId()).emit('join', game.getGameId());
 
     // send initial ship placements
-    io.to(players[0]).emit('update', game.getGameMap(0), game.getGrid(1, 0));
-    io.to(players[1]).emit('update', game.getGameMap(1), game.getGrid(0, 1));
+    io.to(players[0]).emit('update', game.getGameMap(0), game.getGrid(1, 0), 0, game.getPlayerTurn());
+    io.to(players[1]).emit('update', game.getGameMap(1), game.getGrid(0, 1), 1, game.getPlayerTurn());
 
     console.log((new Date().toISOString()) + " " + players[0] + " and " + players[1] + " have joined game ID " + game.getGameId());
   }

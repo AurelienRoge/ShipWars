@@ -143,6 +143,7 @@ class shipWarsGame {
                         }
                     }
                     this.weaponUsed(this.getPlayerTurn(), "Radar");
+                    this.changeAttackMode(this.getPlayerTurn(), "Missile");
                     this.changePlayerTurn();
                 }
                 else { console.log("Plus de charge pour cette arme !") }
@@ -189,6 +190,7 @@ class shipWarsGame {
                         GameMap[index] = "R";
                     }
                     this.weaponUsed(this.getPlayerTurn(), "Torpille");
+                    this.changeAttackMode(this.getPlayerTurn(), "Missile");
                     this.changePlayerTurn();
                 }
                 else { console.log("Plus de charge pour cette arme !") }
@@ -271,6 +273,7 @@ class shipWarsGame {
                     }
 
                     this.weaponUsed(this.getPlayerTurn(), "Bombe");
+                    this.changeAttackMode(this.getPlayerTurn(), "Missile");
                     this.changePlayerTurn();
                 }
                 else { console.log("Plus de charge pour cette arme !") }
@@ -293,77 +296,45 @@ class shipWarsGame {
     }
 
     weaponUsed(player, weapon) {
-        if (player == 0) {
-            switch (weapon) {
-                case "Radar":
-                    this.players[0].getWeaponUsed().radar = true;
-                    break;
-                case "Torpille":
-                    this.players[0].getWeaponUsed().torpille = true;
-                    break;
 
-                case "Bombe":
-                    this.players[0].getWeaponUsed().bombe = true;
-                    break;
-            }
-        }
-        if (player == 1) {
-            switch (weapon) {
-                case "Radar":
-                    this.players[1].getWeaponUsed().radar = true;
-                    break;
-                case "Torpille":
-                    this.players[1].getWeaponUsed().torpille = true;
-                    break;
+        switch (weapon) {
+            case "Radar":
+                this.players[player].weaponHasBeenUsed(weapon);
+                break;
+            case "Torpille":
+                this.players[player].weaponHasBeenUsed(weapon);
+                break;
 
-                case "Bombe":
-                    this.players[1].getWeaponUsed().bombe = true;
-                    break;
-            }
+            case "Bombe":
+                this.players[player].weaponHasBeenUsed(weapon);
+                break;
         }
     }
 
 
     isWeaponAvailable(player, weapon) {
-        if (player == 0) {
-            switch (weapon) {
-                case "Radar":
-                    if (this.players[0].getWeaponUsed().radar == false) {
-                        return true;
-                    }
-                    break;
-                case "Torpille":
-                    if (this.players[0].getWeaponUsed().torpille == false) {
-                        return true;
-                    }
-                    break;
-
-                case "Bombe":
-                    if (this.players[0].getWeaponUsed().bombe == false) {
-                        return true;
-                    }
-                    break;
-            }
-        }
-        if (player == 1) {
-            switch (weapon) {
-                case "Radar":
-                    if (this.players[1].getWeaponUsed().radar == false) {
-                        return true;
-                    }
-                    break;
-                case "Torpille":
-                    if (this.players[1].getWeaponUsed().torpille == false) {
-                        return true;
-                    }
-                    break;
-
-                case "Bombe":
-                    if (this.players[1].getWeaponUsed().bombe == false) {
-                        return true;
-                    }
-                    break;
-            }
+        switch (weapon) {
+            case "Radar":
+                if (this.players[player].getWeaponUsed().radar == false) {
+                    return true;
+                }
+                else {
+                    return false
+                }
+            case "Torpille":
+                if (this.players[player].getWeaponUsed().torpille == false) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            case "Bombe":
+                if (this.players[player].getWeaponUsed().bombe == false) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
         }
     }
 
@@ -371,7 +342,7 @@ class shipWarsGame {
     isMapFinished(GameMap) {
         //On vérifie s'il reste des cases bateau dans le tableau
         for (let i = 0; i < GameMap.length; i++) {
-            if (GameMap[i].map == "B") {
+            if (GameMap[i] == "B") {
                 return false; //Si oui, alors la partie n'est pas terminé pour ce joueur
             }
         }
@@ -463,6 +434,33 @@ class shipWarsGame {
             for (let j = 0; j < 100; j++) {
                 if (tmp[j] == "B") {
                     tmp[j] == "V"
+                }
+            }
+            return tmp;
+        }
+    }
+
+    getSelfGridOnlyBoats(player){
+        if (player === 0) {
+            let tmp = Array.from(this.getGameMapPlayer0());
+            for (let j = 0; j < 100; j++) {
+                if (tmp[j] == "BR") {
+                    tmp[j] = "B"
+                }
+                if(tmp[j] == "VR"){
+                    tmp[j] = "V"
+                }
+            }
+            return tmp;
+        }
+        else {
+            let tmp = Array.from(this.getGameMapPlayer1());
+            for (let j = 0; j < 100; j++) {
+                if (tmp[j] == "BR") {
+                    tmp[j] = "B"
+                }
+                if(tmp[j] == "VR"){
+                    tmp[j] = "V"
                 }
             }
             return tmp;

@@ -6,6 +6,7 @@ $(function() {
     //Connecté au serveur
     socket.on('connect', function() {
       console.log('Connected to server.');
+      view.resetGraph();
       $('#disconnected').hide();
       $('#waiting-room').show();   
     });
@@ -13,6 +14,7 @@ $(function() {
     //Déconnecté du serveur
     socket.on('disconnect', function() {
       console.log('Disconnected from server.');
+      view.resetGraph();
       $('#waiting-room').hide();
       $('#game').hide();
       $('#disconnected').show();
@@ -21,7 +23,7 @@ $(function() {
     
     //Un utilisateur a rejoint la partie
     socket.on('join', function(gameId) {
-      //view.game.resetGame();
+      view.resetGraph();
       $('#disconnected').hide();
       $('#waiting-room').hide();
       $('#game').show();
@@ -29,14 +31,18 @@ $(function() {
     })
   
     //Mise a jour du tour de jeu
-    socket.on('update', function(selfGrid, opponentGrid) {
+    socket.on('update', function(selfGrid, opponentGrid, player, playerTurn) {
+      view.setTurn(player, playerTurn)
       view.updateGrids(selfGrid, opponentGrid);
       view.linkTabToGraph();
     });
   
     //Fin de partie (AMODIFIER POUR FAIRE APPARAITRE DES ELEMENTS SUR L HTML)
-    socket.on('gameover', function(isWinner) {
-      //view.game.setGameOver(isWinner);
+    socket.on('gameover', function(player, winner) {
+      console.log("partie terminée");
+      let isWinner;
+      player == winner ? isWinner = true : isWinner = false;
+      view.setGameOver(isWinner);
     });
     
     //Quitter la partie et retour en file d'attente
