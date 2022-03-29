@@ -36,6 +36,10 @@ $(function() {
       view.updateGrids(selfGrid, opponentGrid);
       view.linkTabToGraph();
     });
+
+    socket.on('weaponUsed', function(weapon){
+      view.weaponHasBeenUsed(weapon);
+    })
   
     //Fin de partie 
     socket.on('gameover', function(player, winner) {

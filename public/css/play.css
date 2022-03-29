@@ -46,7 +46,6 @@
     padding: 10px 0px;
     margin: 25px 0 0 0;
     margin-bottom: 25px;
-    background-color: rgba(26, 226, 254, 0.2);
 }
 
 /*Lien pour relancer une partie*/
@@ -117,6 +116,10 @@
 /* Case radar vide */
 .RadarEmpty {
     background-color: rgba(0, 255, 0, 0.5);
+}
+
+.WeaponUsed{
+    background-color: red;
 }
 
 #gametablePlayer0 {
