@@ -67,7 +67,7 @@ io.on('connection', function (socket) {
     inGame: null,
     player: null,
     opponent: null,
-    
+    username: null
   };
 
 
@@ -94,6 +94,11 @@ io.on('connection', function (socket) {
     delete users[socket.id];
   });
 
+  //update username
+  socket.on('update_username', function (SUUUUUsername) {
+    console.log('update d\'username');
+    users[socket.id].username = SUUUUUsername;
+  });
 
   //recevoir le tir du côté client
   socket.on('shot', function (index) {
@@ -211,6 +216,32 @@ function checkGameOver(game) {
     io.to(game.getWinner()).emit('gameover', game.getWinner(), game.getWinner());
     io.to(game.getLoser()).emit('gameover', game.getLoser(), game.getWinner());
 
+    let winner = game.getWinner()
+    console.log("winner ",winner);
+    //ajout score au SQL
+    batNavSQL.query("SELECT * FROM tab", function (err, result, fields) {
+      if (err) throw err;
+      let superi;
+      let userExist = false;
+      for(i = 0; i < result.length; i++){//on trouve l'user
+        console.log(users[winner].username, result[i].User);
+          if(result[i].User == users[winner].username){ //remplacer login pour socket
+              userExist = true;
+              superi = i;
+              i = result.length;
+          }}
+
+      if(userExist){
+        console.log('incrémentation du score du joueur connecté');
+        batNavSQL.query("UPDATE tab SET NbVic =? WHERE User =?", [result[superi].NbVic, users[winner].username], function (err, result) {
+          if (err) throw err;
+          console.log(result.affectedRows + " record(s) updated");
+        });
+      }
+      else{
+        console.log('pas d\'incrémentation du score pour joueur non connecté');
+      }
+    });
   }
 }
 
@@ -240,6 +271,8 @@ app.post('/login', body('login'), (req, res) => {
   const password = req.body.password;
   console.log("combinaison connexion test:",login,password);
 
+
+
   // Error management
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -264,6 +297,7 @@ app.post('/login', body('login'), (req, res) => {
                   req.session.password = password;
                   req.session.save();
                   res.redirect('/');
+                  //socket.emit('update_username', session.login); a mettre ailleurs en ft
               }
               else{
                   console.log("mauvaise combinaison user/mdp")
