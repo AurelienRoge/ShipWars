@@ -66,7 +66,8 @@ io.on('connection', function (socket) {
   users[socket.id] = {
     inGame: null,
     player: null,
-    opponent: null
+    opponent: null,
+    username: null
   };
 
   // Rejoint la file d'attente jusqu'à trouver un adversaire
@@ -91,6 +92,11 @@ io.on('connection', function (socket) {
     delete users[socket.id];
   });
 
+  //update username
+  socket.on('update_username', function (login) {
+    console.log('update d\'username');
+    users[socket.id].username = login;
+  });
 
   //recevoir le tir du côté client
   socket.on('shot', function (index) {
@@ -205,6 +211,26 @@ function checkGameOver(game) {
     console.log((new Date().toISOString()) + ' Game ID ' + game.getGameId() + ' ended.');
     io.to(game.getWinner()).emit('gameover', game.getWinner(), game.getWinner());
     io.to(game.getLoser()).emit('gameover', game.getLoser(), game.getWinner());
+
+    let winner = game.getWinner()
+    //ajout score au SQL
+    batNavSQL.query("SELECT * FROM tab", function (err, result, fields) {
+      if (err) throw err;
+      let superi;
+      for(i = 0; i < result.length; i++){//on trouve l'user
+          if(result[i].User == users[winner].username){ //remplacer login pour socket
+              userExist = true;
+              superi = i;
+              i = result.length;
+          }}
+      if(userExist){
+        console.log('incrémentation du score du joueur connecté')
+        result[superI] += 1;
+      }
+      else{
+        console.log('pas d\'incrémentation du score pour joueur non connecté')
+      }
+    });
   }
 }
 
@@ -258,6 +284,7 @@ app.post('/login', body('login'), (req, res) => {
                   req.session.password = password;
                   req.session.save();
                   res.redirect('/');
+                  //socket.emit('update_username', session.login); a mettre ailleurs en ft
               }
               else{
                   console.log("mauvaise combinaison user/mdp")

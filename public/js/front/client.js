@@ -68,6 +68,7 @@ $(function() {
   //Envoie des coordonnées du tir au serveur
   function sendShot(index) {
     socket.emit('shot', index);
+    socket.emit('update_username', session.login); // si il joue une fois un tir : son pseudo sera enregistré
   }
 
   //Change l'arme du joueur
