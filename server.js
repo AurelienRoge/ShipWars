@@ -70,6 +70,8 @@ io.on('connection', function (socket) {
     username: null
   };
 
+
+
   // Rejoint la file d'attente jusqu'à trouver un adversaire
   socket.join('queue');
 
@@ -112,12 +114,14 @@ io.on('connection', function (socket) {
         //Si son arme est valide (=il a encore une charge dedans)
         if (!game.getPlayer(users[socket.id].player).isWeaponUsed(game.getPlayer(users[socket.id].player).getAttackMode())) {
           if (!game.isGameFinished()) {
+            let tmpAttackMode = game.getPlayer(users[socket.id].player).getAttackMode(); //Je passe par une variable pour éviter le changement d'arme qui se fait suite au tir
             game.playerAttack(index, game.getGameMap(opponent));
-
             // Update game grids on both clients
             io.to(game.getPlayerId(currentPlayer)).emit('update', game.getSelfGridOnlyBoats(currentPlayer), game.getOpponentGridWithShipsHidden(currentPlayer), currentPlayer, game.getPlayerTurn());
             io.to(game.getPlayerId(opponent)).emit('update', game.getSelfGridOnlyBoats(opponent), game.getOpponentGridWithShipsHidden(opponent), opponent, game.getPlayerTurn());
 
+            //If the player used a one-time-use-only weapon, tell him he has no charge left
+            io.to(game.getPlayerId(currentPlayer)).emit('weaponUsed', tmpAttackMode);
             if (game.isGameFinished()) {
               checkGameOver(game);
             }

@@ -66,6 +66,11 @@ class shipWarsView {
 
     //On supprime toutes les classes pour reset l'affichage (donc côté client)
     resetGraph() {
+        this.weaponButtons[1].classList.remove("WeaponUsed");
+        this.weaponButtons[2].classList.remove("WeaponUsed");
+        this.weaponButtons[3].classList.remove("WeaponUsed");
+
+
         for (let i = 0; i < 100; i++) {
             this.tabThisPlayer[i].classList.remove("Boat");
             this.tabThisPlayer[i].classList.remove("Hit");
@@ -88,8 +93,6 @@ class shipWarsView {
 
     //Fonction pour mettre à jour les textures
     linkTabToGraph() {
-        console.log(this.gridThisPlayer);
-        console.log(this.gridFromOpponent);
 
         for (let i = 0; i < 100; i++) {
             switch (this.gridThisPlayer[i]) {
@@ -174,4 +177,21 @@ class shipWarsView {
             $('#turn-status').removeClass('alert-your-turn').addClass('alert-opponent-turn').html('Waiting for opponent.');
         }
     };
+
+    weaponHasBeenUsed(weapon){
+        console.log("Weapon has been used");
+        switch(weapon){
+            case "Radar":
+                this.weaponButtons[1].classList.add("WeaponUsed");
+                break;
+            
+            case "Torpille":
+                this.weaponButtons[2].classList.add("WeaponUsed");
+                break;
+
+            case "Bombe":
+                this.weaponButtons[3].classList.add("WeaponUsed");
+                break;
+        }
+    }
 }

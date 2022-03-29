@@ -46,7 +46,8 @@
     padding: 10px 0px;
     margin: 25px 0 0 0;
     margin-bottom: 25px;
-    background-color: rgba(26, 226, 254, 0.2);
+    display: flex;
+    justify-content: center;
 }
 
 /*Lien pour relancer une partie*/
@@ -76,6 +77,13 @@
     border-color: #d6e9c6;
 }
 
+.cadre {
+    background-color: rgba(140, 142, 144, 0.7);
+    padding: 30px;
+    border-radius: 20px;
+
+}
+
 /*Cadre quand le joueur a perdu*/
 .alert-loser {
     color: #a94442;
@@ -85,7 +93,7 @@
 
 /*Bouton pour quitter la partie*/
 .btn-leave-game {
-    background-color: orange;
+    margin: 0;
 }
 
 
@@ -117,6 +125,10 @@
 /* Case radar vide */
 .RadarEmpty {
     background-color: rgba(0, 255, 0, 0.5);
+}
+
+.WeaponUsed{
+    background-color: red;
 }
 
 #gametablePlayer0 {
@@ -225,7 +237,7 @@ th {
     justify-content: center;
     background-color: #353C3D;
     height: 50px;
-    border-radius: 30px;
+    border-radius: 30px 30px 0px 0px;
 }
 
 .panel-heading {
@@ -268,4 +280,7 @@ th {
     .panel-primary1{
         margin-bottom: 70%;
     }
+}
+.Bombe, .Torpille, .Missile, .Radar {
+    width: 40px;
 }

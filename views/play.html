@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Descript A COMPLETER">
+    <meta name="description"
+        content="Projet de techno Web CIR2 par Aurélien Rogé, Guillaume Leroy, Marco Fordelone, Théophile Demeulier et Théo Vangheluwe">
     <title>Ship Wars</title>
 
     <!-- FAVICON -->
@@ -22,7 +23,7 @@
 
     <link rel="stylesheet" href="../public/css/util.css">
     <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    
     <link rel="stylesheet" href="../vendor/animate/animate.css">
     <link rel="stylesheet" href="../vendor/select2/select2.min.css">
     <link rel="stylesheet" href="../vendor/perfect-scrollbar/perfect-scrollbar.css">
@@ -57,8 +58,8 @@
                         aria-hidden="true"></i>PLAY</a>
                 <a class="hvr-grow hvr-underline-from-center" href="leaderboard.html"><i class="fas fa-trophy"
                         aria-hidden="true"></i>LEADERBOARD</a>
-                <a class="hvr-grow hvr-underline-from-center" href="inscription.html"><i
-                        aria-hidden="true"></i>Connexion</a>
+                <a class="hvr-grow hvr-underline-from-center" href="inscription.html"><i aria-hidden="true"></i>LOG
+                    IN</a>
             </nav>
         </nav>
     </header>
@@ -79,10 +80,12 @@
         <div class="row2">
             <div class="col-sm-4 col-sm-offset-4 text-center">
                 <div class="panel panel-primary1">
-                    <div class="panel-heading-waiting">Waiting Room</div>
-                    <div class="panel-body">
-                        <p>You are connected to the server.</p>
-                        <p>Waiting for another player...</p>
+                    <div class="cadre">
+                        <div class="panel-heading-waiting">Waiting Room</div>
+                        <div class="panel-body">
+                            <p>You are connected to the server.</p>
+                            <p>Waiting for another player...</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -104,9 +107,9 @@
                             <div id="tab1">
                                 <table id="gametablePlayer0">
                                     <h3 class="Adv">You</h3>
-                                    
+
                                     <tr class="tablerow">
-                                        
+
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
@@ -119,7 +122,7 @@
                                         <td class="gametile"></td>
                                     </tr>
                                     <tr class="tablerow">
-                                        
+
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
@@ -132,7 +135,7 @@
                                         <td class="gametile"></td>
                                     </tr>
                                     <tr class="tablerow">
-                                        
+
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
@@ -145,7 +148,7 @@
                                         <td class="gametile"></td>
                                     </tr>
                                     <tr class="tablerow">
-                                        
+
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
@@ -158,7 +161,7 @@
                                         <td class="gametile"></td>
                                     </tr>
                                     <tr class="tablerow">
-                                        
+
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
@@ -171,7 +174,7 @@
                                         <td class="gametile"></td>
                                     </tr>
                                     <tr class="tablerow">
-                                        
+
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
@@ -184,7 +187,7 @@
                                         <td class="gametile"></td>
                                     </tr>
                                     <tr class="tablerow">
-                                        
+
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
@@ -197,7 +200,7 @@
                                         <td class="gametile"></td>
                                     </tr>
                                     <tr class="tablerow">
-                                        
+
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
@@ -210,7 +213,7 @@
                                         <td class="gametile"></td>
                                     </tr>
                                     <tr class="tablerow">
-                                        
+
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
@@ -223,7 +226,7 @@
                                         <td class="gametile"></td>
                                     </tr>
                                     <tr class="tablerow">
-                                        
+
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
@@ -238,17 +241,18 @@
                                 </table>
                             </div>
                             <div id="weaponSelectionBtn">
-                                <button class="weaponBtn">Missile</button>
-                                <button class="weaponBtn">Radar</button>
-                                <button class="weaponBtn">Torpille</button>
-                                <button class="weaponBtn">Bombe</button>
+                                <button class="weaponBtn"><img class="Missile" src="../public/img/missile.png"></button>
+                                <button class="weaponBtn"><img class="Radar" src="../public/img/radar.png"></button>
+                                <button class="weaponBtn"><img class="Torpille"
+                                        src="../public/img/torpille.png"></button>
+                                <button class="weaponBtn"><img class="Bombe" src="../public/img/bombe.png"></button>
                             </div>
                             <div id="tab2">
                                 <table id="gametablePlayer1">
                                     <h3 class="Adv">Opponent</h3>
-                                    
+
                                     <tr class="tablerow">
-                                        
+
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
@@ -261,7 +265,7 @@
                                         <td class="gametile"></td>
                                     </tr>
                                     <tr class="tablerow">
-                                        
+
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
@@ -274,7 +278,7 @@
                                         <td class="gametile"></td>
                                     </tr>
                                     <tr class="tablerow">
-                                        
+
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
@@ -287,7 +291,7 @@
                                         <td class="gametile"></td>
                                     </tr>
                                     <tr class="tablerow">
-                                        
+
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
@@ -300,7 +304,7 @@
                                         <td class="gametile"></td>
                                     </tr>
                                     <tr class="tablerow">
-                                        
+
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
@@ -313,7 +317,7 @@
                                         <td class="gametile"></td>
                                     </tr>
                                     <tr class="tablerow">
-                                        
+
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
@@ -326,7 +330,7 @@
                                         <td class="gametile"></td>
                                     </tr>
                                     <tr class="tablerow">
-                                        
+
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
@@ -339,7 +343,7 @@
                                         <td class="gametile"></td>
                                     </tr>
                                     <tr class="tablerow">
-                                        
+
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
@@ -352,7 +356,7 @@
                                         <td class="gametile"></td>
                                     </tr>
                                     <tr class="tablerow">
-                                        
+
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
@@ -365,7 +369,7 @@
                                         <td class="gametile"></td>
                                     </tr>
                                     <tr class="tablerow">
-                                        
+
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
                                         <td class="gametile"></td>
@@ -387,19 +391,19 @@
 
                 <ul class="list-group">
                     <!-- Status -->
-                    <li class="list-group-item text-center" id="turn-status"></li>
+                    <li id="turn-status"></li>
                     <!-- Sélection d'arme -->
-                    
+
                 </ul>
 
             </div>
         </div>
-        
+
     </div>
 
 
     <footer class="footerb">
-        <p>All rights reserved © Ship Wars by Aurélien, Guillaume, Marco, Théo, Théophile</p>
+        <p>© Ship Wars, All rights reserved, by Aurélien R, Guillaume L, Marco F, Théo V and Théophile D</p>
     </footer>
 
     <script src="../public/js/front/ShipWarsView.js"></script>

@@ -126,6 +126,7 @@
   text-decoration: none;
   color: #707B7C;
   margin: 0 3%;
+  width: 100px;
 }
 
 .tab-link.active {
