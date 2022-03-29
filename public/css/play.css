@@ -46,6 +46,8 @@
     padding: 10px 0px;
     margin: 25px 0 0 0;
     margin-bottom: 25px;
+    display: flex;
+    justify-content: center;
 }
 
 /*Lien pour relancer une partie*/
@@ -75,6 +77,13 @@
     border-color: #d6e9c6;
 }
 
+.cadre {
+    background-color: rgba(140, 142, 144, 0.7);
+    padding: 30px;
+    border-radius: 20px;
+
+}
+
 /*Cadre quand le joueur a perdu*/
 .alert-loser {
     color: #a94442;
@@ -84,7 +93,7 @@
 
 /*Bouton pour quitter la partie*/
 .btn-leave-game {
-    background-color: orange;
+    margin: 0;
 }
 
 
