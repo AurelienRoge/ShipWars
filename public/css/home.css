@@ -6,6 +6,21 @@
 * main
 ***************/
 
+<<<<<<< Updated upstream
+=======
+.presentation {
+    display: flex;
+    justify-content: space-around;
+    width: 90%;
+    margin: auto;
+    margin-bottom: 5%;
+}
+
+.game-presentation{
+    margin-top: 9%;
+}
+
+>>>>>>> Stashed changes
 main {
     width: 85%;
     margin: auto;
@@ -60,7 +75,11 @@ h1, h2, h3, h4, h5 {
 }
 
 .game-presentation p {
+<<<<<<< Updated upstream
     width: 90%;
+=======
+    width: 80%;
+>>>>>>> Stashed changes
     margin: auto;
     font-family: 'Roboto-Light', sans-serif;
     color: #F4F3EE;
@@ -80,12 +99,28 @@ h1, h2, h3, h4, h5 {
     transition: ease all .5s;
 }
 
+<<<<<<< Updated upstream
 .character-img {
     width: 350px;
     height: 350px;
     margin: auto;
     padding: 15px;
     transition: ease all .5s;
+=======
+.imageind {
+    margin-top: 5%;
+
+}
+
+.boatimage {
+    margin-top: 5%;
+    width: 400px;
+    margin: auto;
+    padding: 15px;
+    transition: ease all .5s;
+    border-radius: 100px;
+    transform: rotate(-5deg);
+>>>>>>> Stashed changes
 }
 
 .h2-title {
@@ -104,8 +139,13 @@ h1, h2, h3, h4, h5 {
     transition: ease all .5s;
 }
 
+<<<<<<< Updated upstream
 .character-presentation p {
     width: 90%;
+=======
+.game-presentation p {
+    width: 80%;
+>>>>>>> Stashed changes
     margin: auto;
     font-family: 'Roboto-Light', sans-serif;
     color: #F4F3EE;
@@ -142,11 +182,19 @@ h1, h2, h3, h4, h5 {
         margin-top: 50px;
         margin-bottom: 50px;
     }
+<<<<<<< Updated upstream
     .character-img {
         width: 350px;
         height: 350px;
     }
     .character-presentation div {
+=======
+    .boatimage {
+        width: 350px;
+        height: 350px;
+    }
+    .boatimage div {
+>>>>>>> Stashed changes
         margin-top: 25px;
     }
     .h2-title  {
