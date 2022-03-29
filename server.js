@@ -66,8 +66,11 @@ io.on('connection', function (socket) {
   users[socket.id] = {
     inGame: null,
     player: null,
-    opponent: null
+    opponent: null,
+    
   };
+
+
 
   // Rejoint la file d'attente jusqu'à trouver un adversaire
   socket.join('queue');
@@ -207,6 +210,7 @@ function checkGameOver(game) {
     console.log((new Date().toISOString()) + ' Game ID ' + game.getGameId() + ' ended.');
     io.to(game.getWinner()).emit('gameover', game.getWinner(), game.getWinner());
     io.to(game.getLoser()).emit('gameover', game.getLoser(), game.getWinner());
+
   }
 }
 

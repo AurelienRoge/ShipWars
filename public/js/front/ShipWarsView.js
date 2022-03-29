@@ -178,10 +178,6 @@ class shipWarsView {
         }
     };
 
-
-    /*this.weaponButtons[1].addEventListener('click', function () { changeWeapon("Radar") });
-        this.weaponButtons[2].addEventListener('click', function () { changeWeapon("Torpille") });
-        this.weaponButtons[3].addEventListener('click', function () { changeWeapon("Bombe") });*/
     weaponHasBeenUsed(weapon){
         console.log("Weapon has been used");
         switch(weapon){
