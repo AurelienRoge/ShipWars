@@ -1,25 +1,15 @@
-<<<<<<< Updated upstream
-*{
-    padding: 0;
-    margin: auto;
-}
-=======
 * {
     padding: 0;
     margin: auto;
 }
 
->>>>>>> Stashed changes
 #gametablePlayer0 {
     background-color: white;
     border-collapse: collapse;
 }
 
-<<<<<<< Updated upstream
-=======
 
 
->>>>>>> Stashed changes
 #gametablePlayer1 {
     background-color: white;
     border-collapse: collapse;
@@ -47,14 +37,6 @@
     text-align: center;
 }
 
-<<<<<<< Updated upstream
-.weaponBtn {
-    margin: 5px;
-    width: 100px;
-    height: 50px;
-}
-=======
->>>>>>> Stashed changes
 
 
 
@@ -63,11 +45,8 @@
 #turn-status {
     padding: 10px 0px;
     margin: 25px 0 0 0;
-<<<<<<< Updated upstream
-=======
     margin-bottom: 25px;
     background-color: rgba(26, 226, 254, 0.2);
->>>>>>> Stashed changes
 }
 
 /*Lien pour relancer une partie*/
@@ -105,13 +84,8 @@
 }
 
 /*Bouton pour quitter la partie*/
-<<<<<<< Updated upstream
-.btn-leave-game{
-    background-color : orange;
-=======
 .btn-leave-game {
     background-color: orange;
->>>>>>> Stashed changes
 }
 
 
@@ -145,19 +119,6 @@
     background-color: rgba(0, 255, 0, 0.5);
 }
 
-<<<<<<< Updated upstream
-#gametablePlayer0{
-    background-color: #49D4E3;
-    border-collapse: collapse;
-}
-
-#gametablePlayer1{
-    background-color: #49D4E3;
-    border-collapse: collapse;
-}
-
-#divTwoTabs{
-=======
 #gametablePlayer0 {
     background-color: #2A75C1;
     border-collapse: collapse;
@@ -169,25 +130,11 @@
 }
 
 #divTwoTabs {
->>>>>>> Stashed changes
     width: 90%;
     display: flex;
     align-items: center;
     justify-content: space-around;
     padding-bottom: 2%;
-<<<<<<< Updated upstream
-    
-}
-
-#weaponSelectionBtn{
-    display: flex;
-    justify-content: center;
-}
-
-.gametile{
-    width: 40px;
-    height: 40px;
-=======
 
 }
 
@@ -200,43 +147,27 @@
 .gametile {
     width: 30px;
     height: 30px;
->>>>>>> Stashed changes
     border: solid 1px black;
     margin: 0;
 }
 
-<<<<<<< Updated upstream
-.colheader{
-=======
 .colheader {
->>>>>>> Stashed changes
     text-align: center;
     height: 40px;
 }
 
-<<<<<<< Updated upstream
-.weaponBtn{
-=======
 .weaponBtn {
->>>>>>> Stashed changes
     margin: 5px;
     width: 100px;
     height: 50px;
 }
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 .backgroundplay {
     background-image: url(../img/bgplay.png);
     background-repeat: repeat-y;
     background-size: cover;
     background-attachment: fixed;
-<<<<<<< Updated upstream
-    
-=======
 
->>>>>>> Stashed changes
 }
 
 .row {
@@ -248,11 +179,6 @@
     margin-top: 18%;
 }
 
-<<<<<<< Updated upstream
-#gametablePlayer0, #gametablePlayer1 {
-    margin-top: 10px;
-    width: 105%;;
-=======
 .row2 {
     display: flex;
     justify-content: center;
@@ -266,7 +192,6 @@
     margin-top: 10px;
     width: 105%;
     ;
->>>>>>> Stashed changes
 }
 
 #tab1, #tab2 {
@@ -274,53 +199,21 @@
     flex-direction: column;
     margin-top: 3%;
 }
-<<<<<<< Updated upstream
-h3{
-    text-align: center;
-}
-=======
 
 h3 {
     text-align: center;
 }
 
->>>>>>> Stashed changes
 th {
     display: flex;
     justify-content: center;
 }
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 #game {
     font-size: 14px;
     line-height: 1.43;
     color: #333;
 }
-<<<<<<< Updated upstream
-.panel-heading {
-    padding-left: 20%;
-    padding-top: 2%;
-    padding-bottom: 2%;
-    color: white;
-    background-color: black;
-    font-size: 1.3em;
-    
-}
-#game {
-    margin-top: 10%;
-    margin-left: 10%;
-    margin-right: 10%;
-    background-color: white;
-}
-
-#weaponSelectionBtn{
-    display: flex;
-    justify-content: space-around;
-}
-
-=======
 
 .Adv {
     font-size: 1.1em;
@@ -372,8 +265,7 @@ th {
         flex-direction: initial;
         margin-top: 8%;
     }
-    .panel-primary{
+    .panel-primary1{
         margin-bottom: 70%;
     }
 }
->>>>>>> Stashed changes
