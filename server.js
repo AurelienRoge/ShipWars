@@ -93,9 +93,9 @@ io.on('connection', function (socket) {
   });
 
   //update username
-  socket.on('update_username', function (login) {
+  socket.on('update_username', function (SUUUUUsername) {
     console.log('update d\'username');
-    users[socket.id].username = login;
+    users[socket.id].username = SUUUUUsername;
   });
 
   //recevoir le tir du côté client
@@ -213,22 +213,29 @@ function checkGameOver(game) {
     io.to(game.getLoser()).emit('gameover', game.getLoser(), game.getWinner());
 
     let winner = game.getWinner()
+    console.log("winner ",winner);
     //ajout score au SQL
     batNavSQL.query("SELECT * FROM tab", function (err, result, fields) {
       if (err) throw err;
       let superi;
+      let userExist = false;
       for(i = 0; i < result.length; i++){//on trouve l'user
+        console.log(users[winner].username, result[i].User);
           if(result[i].User == users[winner].username){ //remplacer login pour socket
               userExist = true;
               superi = i;
               i = result.length;
           }}
+
       if(userExist){
-        console.log('incrémentation du score du joueur connecté')
-        result[superI] += 1;
+        console.log('incrémentation du score du joueur connecté');
+        batNavSQL.query("UPDATE tab SET NbVic =? WHERE User =?", [result[superi].NbVic, users[winner].username], function (err, result) {
+          if (err) throw err;
+          console.log(result.affectedRows + " record(s) updated");
+        });
       }
       else{
-        console.log('pas d\'incrémentation du score pour joueur non connecté')
+        console.log('pas d\'incrémentation du score pour joueur non connecté');
       }
     });
   }
@@ -259,6 +266,8 @@ app.post('/login', body('login'), (req, res) => {
   const login = req.body.login;
   const password = req.body.password;
   console.log("combinaison connexion test:",login,password);
+
+
 
   // Error management
   const errors = validationResult(req);
