@@ -13,8 +13,7 @@ git clone https://github.com/AurelienRoge/ShipWars
 ```
 npm install
 ```
-
-Étape 3: Lancer/créer votre base de données en utilisant un outil tel que XAMPP (ou autre)<br/>
+Étape 3: Lancer/créer votre base de données en utilisant un outil tel que XAMPP (ou autre).<br/>
 Étape 3.5 : Créer la base de données :<br/>
 <br/>
 Par défaut le SQL fonctionne avec une base de données avec ces paramètres :<br/>
